@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:16
+    container_name: "coreflow-db"
+    environment:
+      POSTGRES_PASSWORD: "pass"
+      POSTGRES_USER: "User"
+      POSTGRES_DB: "coreflow-db"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  app:
+    build: .
+    container_name: coreflow-app
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+      NODE_ENV: development
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
