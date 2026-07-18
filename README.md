@@ -10,7 +10,7 @@ Node.js · TypeScript · Express · PostgreSQL · Prisma 6 · JWT · bcrypt · D
 
 ```bash
 npm install
-cp .env.example .env   # fill in your values
+cp .env.example .env   # fill in variable values
 docker compose up -d db
 npx prisma migrate dev
 npx prisma db seed
@@ -23,8 +23,8 @@ Default admin after seeding: `admin@coreflow.com` / `admin123`
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Dev server with hot reload |
-| `npm run build` | Compile to `dist/` |
-| `npm start` | Run production build |
+| Command         | Description                |
+| --------------- | -------------------------- |
+| `npm run dev`   | Dev server with hot reload |
+| `npm run build` | Compile to `dist/`         |
+| `npm start`     | Run production build       |

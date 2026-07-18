@@ -9,6 +9,16 @@
 * 🟢 You can import this file directly.
 */
 
+export const ContractType = {
+  FULL_TIME: 'FULL_TIME',
+  PART_TIME: 'PART_TIME',
+  CONTRACT: 'CONTRACT',
+  INTERN: 'INTERN'
+} as const
+
+export type ContractType = (typeof ContractType)[keyof typeof ContractType]
+
+
 export const Role = {
   ADMIN: 'ADMIN',
   MODERATOR: 'MODERATOR',
@@ -18,14 +28,32 @@ export const Role = {
 export type Role = (typeof Role)[keyof typeof Role]
 
 
-export const ContractType = {
-  FULL_TIME: 'FULL_TIME',
-  PART_TIME: 'PART_TIME',
-  CONTRACT: 'CONTRACT',
-  INTERN: 'INTERN'
+export const Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  OTHER: 'OTHER'
 } as const
 
-export type ContractType = (typeof ContractType)[keyof typeof ContractType]
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const LeaveRequestType = {
+  VACATION: 'VACATION',
+  SICK: 'SICK',
+  MATERNITY: 'MATERNITY',
+  UNPAID: 'UNPAID'
+} as const
+
+export type LeaveRequestType = (typeof LeaveRequestType)[keyof typeof LeaveRequestType]
+
+
+export const LeaveRequestStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type LeaveRequestStatus = (typeof LeaveRequestStatus)[keyof typeof LeaveRequestStatus]
 
 
 export const OrderStatus = {

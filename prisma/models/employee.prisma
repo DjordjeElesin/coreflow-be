@@ -1,0 +1,49 @@
+model Department {
+    id          Int        @id @default(autoincrement())
+    name        String
+    description String
+    manager     Employee?  @relation("DepartmentManager", fields: [managerId], references: [id])
+    managerId   Int?       @unique
+    employees   Employee[] @relation("DepartmentEmployees")
+
+    @@map("departments")
+}
+
+model Position {
+    id        Int        @id @default(autoincrement())
+    name      String
+    employees Employee[]
+
+    @@map("positions")
+}
+
+model LeaveRequest {
+    id         Int                @id @default(autoincrement())
+    startDate  DateTime           @db.Date
+    endDate    DateTime           @db.Date
+    leaveType  LeaveRequestType
+    status     LeaveRequestStatus
+    reason     String?
+    employee   Employee           @relation(fields: [employeeId], references: [id])
+    employeeId Int
+
+    @@map("leave_requests")
+}
+
+model Employee {
+    id                 Int            @id
+    user               User           @relation(fields: [id], references: [id])
+    hireDate           DateTime       @default(now())
+    contractType       ContractType
+    leaveBalance       Int            @default(0)
+    leaveRequests      LeaveRequest[]
+    lastLeaveResetYear Int            @default(0)
+    salary             Float
+    department         Department     @relation("DepartmentEmployees", fields: [departmentId], references: [id])
+    departmentId       Int
+    managedDepartment  Department?    @relation("DepartmentManager")
+    position           Position       @relation(fields: [positionId], references: [id])
+    positionId         Int
+
+    @@map("employees")
+}

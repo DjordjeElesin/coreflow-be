@@ -1,7 +1,14 @@
 import "../src/config/env";
 import bcrypt from "bcrypt";
 import prisma from "../src/config/database";
-import { ContractType } from "../src/config/generated/client";
+import {
+  ContractType,
+  Gender,
+  LeaveRequestStatus,
+  LeaveRequestType,
+} from "../src/config/generated/client";
+import { EmployeeCreateNestedOneWithoutLeaveRequestsInput } from "../src/config/generated/models";
+import { startOfYear, endOfYear, addDays, isAfter } from "date-fns";
 
 type DummyCategory = { slug: string; name: string };
 
@@ -31,6 +38,9 @@ type DummyUser = {
   password: string;
   phone: string;
   image: string;
+  gender: string;
+  birthDate: string;
+  university: string;
   address: {
     address: string;
     city: string;
@@ -52,11 +62,37 @@ const CONTRACT_TYPES: ContractType[] = [
   ContractType.INTERN,
 ];
 
+const LEAVE_TYPE: LeaveRequestType[] = [
+  LeaveRequestType.VACATION,
+  LeaveRequestType.SICK,
+  LeaveRequestType.MATERNITY,
+  LeaveRequestType.UNPAID,
+];
+
+const LEAVE_STATUS: LeaveRequestStatus[] = [
+  LeaveRequestStatus.APPROVED,
+  LeaveRequestStatus.PENDING,
+  LeaveRequestStatus.REJECTED,
+];
+
 const randomItem = <T>(arr: T[]): T =>
   arr[Math.floor(Math.random() * arr.length)];
 
 const randomBetween = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
+
+const randomDateInYear = (year: number) => {
+  const start = startOfYear(new Date(year, 0, 1)).getTime(); // milliseconds
+  const end = endOfYear(new Date(year, 0, 1)).getTime(); // milliseconds
+  const randomMs = Math.floor(Math.random() * (end - start + 1)) + start;
+  return new Date(randomMs);
+};
+
+const mapGender = (gender: string): Gender => {
+  if (gender.toLowerCase() === "male") return Gender.MALE;
+  if (gender.toLowerCase() === "female") return Gender.FEMALE;
+  return Gender.OTHER;
+};
 
 const seedAdminUser = async () => {
   const hashedPassword = await bcrypt.hash("admin123", 10);
@@ -68,17 +104,19 @@ const seedAdminUser = async () => {
       firstName: "Admin",
       lastName: "Coreflow",
       email: "admin@coreflow.com",
-      userName: "admin",
+      username: "admin",
       password: hashedPassword,
       role: "ADMIN",
     },
   });
 
-  console.log("Seeded admin user (email: admin@coreflow.com, password: admin123)");
+  console.log(
+    "Seeded admin user (email: admin@coreflow.com, password: admin123)",
+  );
 };
 
 const seedEmployees = async () => {
-  const res = await fetch("https://dummyjson.com/users?limit=20");
+  const res = await fetch("https://dummyjson.com/users");
   const { users }: { users: DummyUser[] } = await res.json();
 
   const departmentNames = [...new Set(users.map((u) => u.company.department))];
@@ -118,10 +156,13 @@ const seedEmployees = async () => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        userName: user.username,
+        username: user.username,
         password: hashedPassword,
         phone: user.phone,
         profileImage: user.image,
+        gender: mapGender(user.gender),
+        birthDate: new Date(user.birthDate),
+        education: user.university,
         role: "USER",
         addressId: address.id,
       },
@@ -189,7 +230,35 @@ const seedProducts = async (categoryMap: Record<string, number>) => {
   console.log(`Seeded ${products.length} products`);
 };
 
+const seedLeaveRequest = async () => {
+  const employees = await prisma.employee.findMany();
+
+  for (let i = 0; i < 10; i++) {
+    const randomEmployee = randomItem(employees);
+    const randomYear = randomItem([2026, 2025, 2024, 2023, 2022]);
+    const startDate = randomDateInYear(randomYear);
+    const endDate = addDays(startDate, randomBetween(1, 10));
+    const today = new Date();
+
+    await prisma.leaveRequest.create({
+      data: {
+        startDate,
+        endDate,
+        employeeId: randomEmployee.id,
+        leaveType: randomItem(LEAVE_TYPE),
+        status: isAfter(endDate, today)
+          ? randomItem(LEAVE_STATUS)
+          : randomItem([
+              LeaveRequestStatus.APPROVED,
+              LeaveRequestStatus.REJECTED,
+            ]),
+      },
+    });
+  }
+};
+
 const main = async () => {
+  await prisma.leaveRequest.deleteMany();
   await prisma.employee.deleteMany();
   await prisma.user.deleteMany();
   await prisma.address.deleteMany();
@@ -200,6 +269,7 @@ const main = async () => {
 
   await seedAdminUser();
   await seedEmployees();
+  await seedLeaveRequest();
 
   const categoryMap = await seedCategories();
   await seedProducts(categoryMap);

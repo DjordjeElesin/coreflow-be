@@ -1,0 +1,11 @@
+model Customer {
+    id        Int      @id @default(autoincrement())
+    name      String
+    email     String
+    phone     String
+    addressId Int?     @unique
+    address   Address? @relation(fields: [addressId], references: [id])
+    orders    Order[]
+
+    @@map("customers")
+}

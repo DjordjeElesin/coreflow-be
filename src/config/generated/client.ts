@@ -29,8 +29,8 @@ export * from "./enums"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Customers
+ * const customers = await prisma.customer.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -40,15 +40,10 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
- * Model User
+ * Model Customer
  * 
  */
-export type User = Prisma.UserModel
-/**
- * Model Address
- * 
- */
-export type Address = Prisma.AddressModel
+export type Customer = Prisma.CustomerModel
 /**
  * Model Department
  * 
@@ -60,15 +55,25 @@ export type Department = Prisma.DepartmentModel
  */
 export type Position = Prisma.PositionModel
 /**
+ * Model LeaveRequest
+ * 
+ */
+export type LeaveRequest = Prisma.LeaveRequestModel
+/**
  * Model Employee
  * 
  */
 export type Employee = Prisma.EmployeeModel
 /**
- * Model Customer
+ * Model Order
  * 
  */
-export type Customer = Prisma.CustomerModel
+export type Order = Prisma.OrderModel
+/**
+ * Model OrderItem
+ * 
+ */
+export type OrderItem = Prisma.OrderItemModel
 /**
  * Model ProductCategory
  * 
@@ -80,12 +85,12 @@ export type ProductCategory = Prisma.ProductCategoryModel
  */
 export type Product = Prisma.ProductModel
 /**
- * Model Order
+ * Model User
  * 
  */
-export type Order = Prisma.OrderModel
+export type User = Prisma.UserModel
 /**
- * Model OrderItem
+ * Model Address
  * 
  */
-export type OrderItem = Prisma.OrderItemModel
+export type Address = Prisma.AddressModel

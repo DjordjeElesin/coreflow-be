@@ -327,11 +327,6 @@ export type CustomerUncheckedUpdateManyInput = {
   addressId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
-export type CustomerNullableScalarRelationFilter = {
-  is?: Prisma.CustomerWhereInput | null
-  isNot?: Prisma.CustomerWhereInput | null
-}
-
 export type CustomerCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -371,6 +366,45 @@ export type CustomerScalarRelationFilter = {
   isNot?: Prisma.CustomerWhereInput
 }
 
+export type CustomerNullableScalarRelationFilter = {
+  is?: Prisma.CustomerWhereInput | null
+  isNot?: Prisma.CustomerWhereInput | null
+}
+
+export type StringFieldUpdateOperationsInput = {
+  set?: string
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type CustomerCreateNestedOneWithoutOrdersInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutOrdersInput, Prisma.CustomerUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutOrdersInput
+  connect?: Prisma.CustomerWhereUniqueInput
+}
+
+export type CustomerUpdateOneRequiredWithoutOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutOrdersInput, Prisma.CustomerUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutOrdersInput
+  upsert?: Prisma.CustomerUpsertWithoutOrdersInput
+  connect?: Prisma.CustomerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutOrdersInput, Prisma.CustomerUpdateWithoutOrdersInput>, Prisma.CustomerUncheckedUpdateWithoutOrdersInput>
+}
+
 export type CustomerCreateNestedOneWithoutAddressInput = {
   create?: Prisma.XOR<Prisma.CustomerCreateWithoutAddressInput, Prisma.CustomerUncheckedCreateWithoutAddressInput>
   connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutAddressInput
@@ -401,66 +435,6 @@ export type CustomerUncheckedUpdateOneWithoutAddressNestedInput = {
   delete?: Prisma.CustomerWhereInput | boolean
   connect?: Prisma.CustomerWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutAddressInput, Prisma.CustomerUpdateWithoutAddressInput>, Prisma.CustomerUncheckedUpdateWithoutAddressInput>
-}
-
-export type CustomerCreateNestedOneWithoutOrdersInput = {
-  create?: Prisma.XOR<Prisma.CustomerCreateWithoutOrdersInput, Prisma.CustomerUncheckedCreateWithoutOrdersInput>
-  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutOrdersInput
-  connect?: Prisma.CustomerWhereUniqueInput
-}
-
-export type CustomerUpdateOneRequiredWithoutOrdersNestedInput = {
-  create?: Prisma.XOR<Prisma.CustomerCreateWithoutOrdersInput, Prisma.CustomerUncheckedCreateWithoutOrdersInput>
-  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutOrdersInput
-  upsert?: Prisma.CustomerUpsertWithoutOrdersInput
-  connect?: Prisma.CustomerWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutOrdersInput, Prisma.CustomerUpdateWithoutOrdersInput>, Prisma.CustomerUncheckedUpdateWithoutOrdersInput>
-}
-
-export type CustomerCreateWithoutAddressInput = {
-  name: string
-  email: string
-  phone: string
-  orders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
-}
-
-export type CustomerUncheckedCreateWithoutAddressInput = {
-  id?: number
-  name: string
-  email: string
-  phone: string
-  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
-}
-
-export type CustomerCreateOrConnectWithoutAddressInput = {
-  where: Prisma.CustomerWhereUniqueInput
-  create: Prisma.XOR<Prisma.CustomerCreateWithoutAddressInput, Prisma.CustomerUncheckedCreateWithoutAddressInput>
-}
-
-export type CustomerUpsertWithoutAddressInput = {
-  update: Prisma.XOR<Prisma.CustomerUpdateWithoutAddressInput, Prisma.CustomerUncheckedUpdateWithoutAddressInput>
-  create: Prisma.XOR<Prisma.CustomerCreateWithoutAddressInput, Prisma.CustomerUncheckedCreateWithoutAddressInput>
-  where?: Prisma.CustomerWhereInput
-}
-
-export type CustomerUpdateToOneWithWhereWithoutAddressInput = {
-  where?: Prisma.CustomerWhereInput
-  data: Prisma.XOR<Prisma.CustomerUpdateWithoutAddressInput, Prisma.CustomerUncheckedUpdateWithoutAddressInput>
-}
-
-export type CustomerUpdateWithoutAddressInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  orders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
-}
-
-export type CustomerUncheckedUpdateWithoutAddressInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  orders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutOrdersInput = {
@@ -507,6 +481,52 @@ export type CustomerUncheckedUpdateWithoutOrdersInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   addressId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type CustomerCreateWithoutAddressInput = {
+  name: string
+  email: string
+  phone: string
+  orders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerUncheckedCreateWithoutAddressInput = {
+  id?: number
+  name: string
+  email: string
+  phone: string
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerCreateOrConnectWithoutAddressInput = {
+  where: Prisma.CustomerWhereUniqueInput
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutAddressInput, Prisma.CustomerUncheckedCreateWithoutAddressInput>
+}
+
+export type CustomerUpsertWithoutAddressInput = {
+  update: Prisma.XOR<Prisma.CustomerUpdateWithoutAddressInput, Prisma.CustomerUncheckedUpdateWithoutAddressInput>
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutAddressInput, Prisma.CustomerUncheckedCreateWithoutAddressInput>
+  where?: Prisma.CustomerWhereInput
+}
+
+export type CustomerUpdateToOneWithWhereWithoutAddressInput = {
+  where?: Prisma.CustomerWhereInput
+  data: Prisma.XOR<Prisma.CustomerUpdateWithoutAddressInput, Prisma.CustomerUncheckedUpdateWithoutAddressInput>
+}
+
+export type CustomerUpdateWithoutAddressInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  orders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
+}
+
+export type CustomerUncheckedUpdateWithoutAddressInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 

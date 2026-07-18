@@ -8,14 +8,15 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/User'
-export type * from './models/Address'
+export type * from './models/Customer'
 export type * from './models/Department'
 export type * from './models/Position'
+export type * from './models/LeaveRequest'
 export type * from './models/Employee'
-export type * from './models/Customer'
-export type * from './models/ProductCategory'
-export type * from './models/Product'
 export type * from './models/Order'
 export type * from './models/OrderItem'
+export type * from './models/ProductCategory'
+export type * from './models/Product'
+export type * from './models/User'
+export type * from './models/Address'
 export type * from './commonInputTypes'

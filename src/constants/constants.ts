@@ -1,0 +1,2 @@
+export const MAX_LEAVE_CARRYOVER = 10;
+export const ANNUAL_LEAVE_ENTITLEMENT = 22;

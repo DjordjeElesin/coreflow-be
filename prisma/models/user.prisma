@@ -1,0 +1,37 @@
+model User {
+    id           Int       @id @default(autoincrement())
+    firstName    String
+    lastName     String
+    email        String    @unique
+    username     String    @unique
+    password     String
+    phone        String?
+    profileImage String?
+    gender       Gender?
+    birthDate    DateTime? @db.Date
+    education    String?
+    role         Role      @default(USER)
+    createdAt    DateTime  @default(now())
+    updatedAt    DateTime  @updatedAt
+    deletedAt    DateTime?
+    addressId    Int?      @unique
+    address      Address?  @relation(fields: [addressId], references: [id])
+    employee     Employee?
+
+    @@map("users")
+}
+
+model Address {
+    id         Int       @id @default(autoincrement())
+    street     String
+    city       String
+    state      String
+    country    String
+    postalCode String
+    lat        Float?
+    lng        Float?
+    user       User?
+    customer   Customer?
+
+    @@map("addresses")
+}

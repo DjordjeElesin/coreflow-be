@@ -1,8 +1,19 @@
 import { Router } from "express";
-import { getUsers } from "./users.controller";
+import * as usersController from "./users.controller";
+import { validatePayload } from "@/middleware/validate";
+import { createUserSchema } from "./users.validation";
 
-const userRouter = Router();
+const usersRouter = Router();
 
-userRouter.get("/", getUsers);
+//GET METHODS
+usersRouter.get("/", usersController.getUsers);
+usersRouter.get("/:id", usersController.getUser);
 
-export default userRouter;
+//POST METHODS
+usersRouter.post(
+  "/",
+  validatePayload(createUserSchema),
+  usersController.createUser,
+);
+
+export default usersRouter;

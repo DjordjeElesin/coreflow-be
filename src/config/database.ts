@@ -3,6 +3,6 @@ import { PrismaClient } from "./generated/client";
 import env from "./env";
 
 const adapter = new PrismaPg({ connectionString: env.DATABASE_URL });
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient({ adapter, log: ["query", "info"] });
 
 export default prisma;

@@ -18,15 +18,10 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
- * Model User
+ * Model Customer
  * 
  */
-export type User = Prisma.UserModel
-/**
- * Model Address
- * 
- */
-export type Address = Prisma.AddressModel
+export type Customer = Prisma.CustomerModel
 /**
  * Model Department
  * 
@@ -38,15 +33,25 @@ export type Department = Prisma.DepartmentModel
  */
 export type Position = Prisma.PositionModel
 /**
+ * Model LeaveRequest
+ * 
+ */
+export type LeaveRequest = Prisma.LeaveRequestModel
+/**
  * Model Employee
  * 
  */
 export type Employee = Prisma.EmployeeModel
 /**
- * Model Customer
+ * Model Order
  * 
  */
-export type Customer = Prisma.CustomerModel
+export type Order = Prisma.OrderModel
+/**
+ * Model OrderItem
+ * 
+ */
+export type OrderItem = Prisma.OrderItemModel
 /**
  * Model ProductCategory
  * 
@@ -58,12 +63,12 @@ export type ProductCategory = Prisma.ProductCategoryModel
  */
 export type Product = Prisma.ProductModel
 /**
- * Model Order
+ * Model User
  * 
  */
-export type Order = Prisma.OrderModel
+export type User = Prisma.UserModel
 /**
- * Model OrderItem
+ * Model Address
  * 
  */
-export type OrderItem = Prisma.OrderItemModel
+export type Address = Prisma.AddressModel

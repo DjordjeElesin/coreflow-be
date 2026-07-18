@@ -1,0 +1,38 @@
+enum ContractType {
+    FULL_TIME
+    PART_TIME
+    CONTRACT
+    INTERN
+}
+
+enum Role {
+    ADMIN
+    MODERATOR
+    USER
+}
+
+enum Gender {
+    MALE
+    FEMALE
+    OTHER
+}
+
+enum LeaveRequestType {
+    VACATION
+    SICK
+    MATERNITY
+    UNPAID
+}
+enum LeaveRequestStatus {
+    PENDING
+    APPROVED
+    REJECTED
+}
+
+enum OrderStatus {
+    DRAFT
+    CONFIRMED
+    SHIPPED
+    DELIVERED
+    CANCELLED
+}

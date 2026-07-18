@@ -443,6 +443,22 @@ export type AddressSumOrderByAggregateInput = {
   lng?: Prisma.SortOrder
 }
 
+export type AddressCreateNestedOneWithoutCustomerInput = {
+  create?: Prisma.XOR<Prisma.AddressCreateWithoutCustomerInput, Prisma.AddressUncheckedCreateWithoutCustomerInput>
+  connectOrCreate?: Prisma.AddressCreateOrConnectWithoutCustomerInput
+  connect?: Prisma.AddressWhereUniqueInput
+}
+
+export type AddressUpdateOneWithoutCustomerNestedInput = {
+  create?: Prisma.XOR<Prisma.AddressCreateWithoutCustomerInput, Prisma.AddressUncheckedCreateWithoutCustomerInput>
+  connectOrCreate?: Prisma.AddressCreateOrConnectWithoutCustomerInput
+  upsert?: Prisma.AddressUpsertWithoutCustomerInput
+  disconnect?: Prisma.AddressWhereInput | boolean
+  delete?: Prisma.AddressWhereInput | boolean
+  connect?: Prisma.AddressWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AddressUpdateToOneWithWhereWithoutCustomerInput, Prisma.AddressUpdateWithoutCustomerInput>, Prisma.AddressUncheckedUpdateWithoutCustomerInput>
+}
+
 export type AddressCreateNestedOneWithoutUserInput = {
   create?: Prisma.XOR<Prisma.AddressCreateWithoutUserInput, Prisma.AddressUncheckedCreateWithoutUserInput>
   connectOrCreate?: Prisma.AddressCreateOrConnectWithoutUserInput
@@ -465,84 +481,6 @@ export type NullableFloatFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
-}
-
-export type AddressCreateNestedOneWithoutCustomerInput = {
-  create?: Prisma.XOR<Prisma.AddressCreateWithoutCustomerInput, Prisma.AddressUncheckedCreateWithoutCustomerInput>
-  connectOrCreate?: Prisma.AddressCreateOrConnectWithoutCustomerInput
-  connect?: Prisma.AddressWhereUniqueInput
-}
-
-export type AddressUpdateOneWithoutCustomerNestedInput = {
-  create?: Prisma.XOR<Prisma.AddressCreateWithoutCustomerInput, Prisma.AddressUncheckedCreateWithoutCustomerInput>
-  connectOrCreate?: Prisma.AddressCreateOrConnectWithoutCustomerInput
-  upsert?: Prisma.AddressUpsertWithoutCustomerInput
-  disconnect?: Prisma.AddressWhereInput | boolean
-  delete?: Prisma.AddressWhereInput | boolean
-  connect?: Prisma.AddressWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AddressUpdateToOneWithWhereWithoutCustomerInput, Prisma.AddressUpdateWithoutCustomerInput>, Prisma.AddressUncheckedUpdateWithoutCustomerInput>
-}
-
-export type AddressCreateWithoutUserInput = {
-  street: string
-  city: string
-  state: string
-  country: string
-  postalCode: string
-  lat?: number | null
-  lng?: number | null
-  customer?: Prisma.CustomerCreateNestedOneWithoutAddressInput
-}
-
-export type AddressUncheckedCreateWithoutUserInput = {
-  id?: number
-  street: string
-  city: string
-  state: string
-  country: string
-  postalCode: string
-  lat?: number | null
-  lng?: number | null
-  customer?: Prisma.CustomerUncheckedCreateNestedOneWithoutAddressInput
-}
-
-export type AddressCreateOrConnectWithoutUserInput = {
-  where: Prisma.AddressWhereUniqueInput
-  create: Prisma.XOR<Prisma.AddressCreateWithoutUserInput, Prisma.AddressUncheckedCreateWithoutUserInput>
-}
-
-export type AddressUpsertWithoutUserInput = {
-  update: Prisma.XOR<Prisma.AddressUpdateWithoutUserInput, Prisma.AddressUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.AddressCreateWithoutUserInput, Prisma.AddressUncheckedCreateWithoutUserInput>
-  where?: Prisma.AddressWhereInput
-}
-
-export type AddressUpdateToOneWithWhereWithoutUserInput = {
-  where?: Prisma.AddressWhereInput
-  data: Prisma.XOR<Prisma.AddressUpdateWithoutUserInput, Prisma.AddressUncheckedUpdateWithoutUserInput>
-}
-
-export type AddressUpdateWithoutUserInput = {
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
-  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  customer?: Prisma.CustomerUpdateOneWithoutAddressNestedInput
-}
-
-export type AddressUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
-  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  customer?: Prisma.CustomerUncheckedUpdateOneWithoutAddressNestedInput
 }
 
 export type AddressCreateWithoutCustomerInput = {
@@ -605,6 +543,68 @@ export type AddressUncheckedUpdateWithoutCustomerInput = {
   lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   user?: Prisma.UserUncheckedUpdateOneWithoutAddressNestedInput
+}
+
+export type AddressCreateWithoutUserInput = {
+  street: string
+  city: string
+  state: string
+  country: string
+  postalCode: string
+  lat?: number | null
+  lng?: number | null
+  customer?: Prisma.CustomerCreateNestedOneWithoutAddressInput
+}
+
+export type AddressUncheckedCreateWithoutUserInput = {
+  id?: number
+  street: string
+  city: string
+  state: string
+  country: string
+  postalCode: string
+  lat?: number | null
+  lng?: number | null
+  customer?: Prisma.CustomerUncheckedCreateNestedOneWithoutAddressInput
+}
+
+export type AddressCreateOrConnectWithoutUserInput = {
+  where: Prisma.AddressWhereUniqueInput
+  create: Prisma.XOR<Prisma.AddressCreateWithoutUserInput, Prisma.AddressUncheckedCreateWithoutUserInput>
+}
+
+export type AddressUpsertWithoutUserInput = {
+  update: Prisma.XOR<Prisma.AddressUpdateWithoutUserInput, Prisma.AddressUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.AddressCreateWithoutUserInput, Prisma.AddressUncheckedCreateWithoutUserInput>
+  where?: Prisma.AddressWhereInput
+}
+
+export type AddressUpdateToOneWithWhereWithoutUserInput = {
+  where?: Prisma.AddressWhereInput
+  data: Prisma.XOR<Prisma.AddressUpdateWithoutUserInput, Prisma.AddressUncheckedUpdateWithoutUserInput>
+}
+
+export type AddressUpdateWithoutUserInput = {
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  customer?: Prisma.CustomerUpdateOneWithoutAddressNestedInput
+}
+
+export type AddressUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  customer?: Prisma.CustomerUncheckedUpdateOneWithoutAddressNestedInput
 }
 
 
