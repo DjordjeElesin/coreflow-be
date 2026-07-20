@@ -7,7 +7,6 @@ import {
   LeaveRequestStatus,
   LeaveRequestType,
 } from "../src/config/generated/client";
-import { EmployeeCreateNestedOneWithoutLeaveRequestsInput } from "../src/config/generated/models";
 import { startOfYear, endOfYear, addDays, isAfter } from "date-fns";
 
 type DummyCategory = { slug: string; name: string };

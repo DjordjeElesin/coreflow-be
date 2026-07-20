@@ -1,8 +1,13 @@
 import * as usersService from "./users.service";
 import { Request, Response } from "express";
-import { validateIdParam, validateJoiSchema } from "@/utils/validationUtils";
+import {
+  validateIdParam,
+  validateJoiSchema,
+} from "@/utils/validationUtils/validationUtils";
 import { userFiltersSchema } from "./users.validation";
 import { BadRequestError } from "@/errors";
+import { sendResponse } from "@/utils/sendResponse";
+import { HttpStatusCode } from "@/types";
 
 export const getUsers = async (req: Request, res: Response) => {
   const { error, value: filters } = validateJoiSchema(
@@ -16,17 +21,17 @@ export const getUsers = async (req: Request, res: Response) => {
   }
   const users = await usersService.find(filters);
 
-  res.status(200).json(users);
+  sendResponse({ res, statusCode: HttpStatusCode.OK, data: users });
 };
 
 export const getUser = async (req: Request, res: Response) => {
   const id = validateIdParam(req.params.id);
   const user = await usersService.findById(id);
 
-  res.status(200).json(user);
+  sendResponse({ res, statusCode: HttpStatusCode.OK, data: user });
 };
 
 export const createUser = async (req: Request, res: Response) => {
   const user = usersService.post(req.body);
-  res.status(201).json(user);
+  sendResponse({ res, statusCode: HttpStatusCode.CREATED, data: user });
 };

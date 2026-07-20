@@ -60,6 +60,7 @@ export const ModelName = {
   OrderItem: 'OrderItem',
   ProductCategory: 'ProductCategory',
   Product: 'Product',
+  RefreshToken: 'RefreshToken',
   User: 'User',
   Address: 'Address'
 } as const
@@ -192,6 +193,17 @@ export const ProductScalarFieldEnum = {
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const RefreshTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  hashedToken: 'hashedToken',
+  expiresAt: 'expiresAt',
+  revoked: 'revoked'
+} as const
+
+export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

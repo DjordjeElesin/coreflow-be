@@ -3,6 +3,7 @@ import { BaseError } from "@/errors";
 import { HttpStatusCode } from "@/types";
 import logger from "@/config/logger";
 import env from "@/config/env";
+import { sendResponse } from "@/utils/sendResponse";
 
 export const errorHandler = (
   err: Error,
@@ -12,14 +13,17 @@ export const errorHandler = (
 ) => {
   if (err instanceof BaseError && err.isOperational) {
     logger.warn(`${err.name}: ${err.message}`);
-    res.status(err.httpCode).json({ message: err.message });
+    sendResponse({ res, statusCode: err.httpCode, message: err.message });
     return;
   }
 
   logger.error("Unhandled error", { message: err.message, stack: err.stack });
 
   const isProd = env.NODE_ENV === "production";
-  res.status(HttpStatusCode.INTERNAL_SERVER).json({
+
+  sendResponse({
+    res,
+    statusCode: HttpStatusCode.INTERNAL_SERVER,
     message: isProd ? "Internal server error" : err.message,
   });
 };

@@ -85,6 +85,11 @@ export type ProductCategory = Prisma.ProductCategoryModel
  */
 export type Product = Prisma.ProductModel
 /**
+ * Model RefreshToken
+ * 
+ */
+export type RefreshToken = Prisma.RefreshTokenModel
+/**
  * Model User
  * 
  */

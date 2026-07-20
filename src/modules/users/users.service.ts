@@ -2,6 +2,8 @@ import prisma from "@/config/database";
 import { Prisma } from "@/config/generated/client";
 import { ConflictError, NotFoundError } from "@/errors";
 import { TUserFilters } from "./users.validation";
+import { findUniqueByEmail } from "../auth/auth.service";
+import bcrypt from "bcrypt";
 
 const userArgs = {
   omit: { password: true, addressId: true, deletedAt: true, updatedAt: true },
@@ -41,11 +43,13 @@ export const findById = async (id: number) => {
 };
 
 export const post = async (user: Prisma.UserUncheckedCreateInput) => {
-  const existing = await prisma.user.findUnique({
-    where: { email: user.email, deletedAt: null },
-    select: { id: true },
-  });
+  const existing = await findUniqueByEmail(user.email);
   if (existing) throw new ConflictError("Email already in use");
-  const newUser = await prisma.user.create({ data: user });
+
+  const hashedPassword = await bcrypt.hash(user.password, 10);
+
+  const newUser = await prisma.user.create({
+    data: { ...user, password: hashedPassword },
+  });
   return newUser;
 };

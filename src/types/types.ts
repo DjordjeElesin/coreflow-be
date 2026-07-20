@@ -1,5 +1,5 @@
 import { Prisma } from "@/config/generated/client";
-import { ContractType, Gender } from "@/config/generated/enums";
+import { ContractType, Gender, Role } from "@/config/generated/enums";
 import { employeeSelect } from "@/modules/employees/employees.service";
 
 export enum HttpStatusCode {
@@ -14,6 +14,17 @@ export enum HttpStatusCode {
   UNPROCESSABLE_ENTITY = 422,
   INTERNAL_SERVER = 500,
 }
+
+export type TLoginPayload = {
+  email: string;
+  password: string;
+};
+
+// Shape of the JWT payload / the authenticated user attached to req.user.
+export type TAuthUser = {
+  id: number;
+  role: Role;
+};
 
 export type TAddress = {
   id: number;
@@ -33,5 +44,3 @@ export type TEmployeeDbOutput = Prisma.EmployeeGetPayload<{
 export type TUserFields = TEmployeeDbOutput["user"];
 export type TEmployeeResponseDTO = Omit<TEmployeeDbOutput, "user"> &
   TUserFields;
-
-
