@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ObjectSchema } from "joi";
 import { BadRequestError } from "@/errors";
-import { validateJoiSchema } from "@/utils/validationUtils";
+import { validateJoiSchema } from "@/utils/validationUtils/validationUtils";
 
 export const validatePayload =
   (schema: ObjectSchema) =>
