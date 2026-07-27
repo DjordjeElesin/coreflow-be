@@ -1,7 +1,12 @@
 import * as employeesController from "./employees.controller";
 import { Router } from "express";
 import { validatePayload } from "@/middleware/validate";
-import { updateEmployeeSchema } from "./employees.validation";
+import {
+  createEmployeeSchema,
+  createLeaveRequestSchema,
+  updateEmployeeSchema,
+  updateLeaveRequestSchema,
+} from "./employees.validation";
 import { requireRoles } from "@/middleware/authorizaton";
 import { Role } from "@/config/generated/enums";
 
@@ -12,13 +17,38 @@ employeesRouter.get("/", employeesController.getEmployees);
 employeesRouter.get("/:id", employeesController.getEmployee);
 
 //POST METHODS
+employeesRouter.post(
+  "/",
+  requireRoles([Role.ADMIN, Role.MODERATOR]),
+  validatePayload(createEmployeeSchema),
+  employeesController.createEmployee,
+);
 
-//PATCH METHODS
+employeesRouter.post(
+  "/:id/leave-request",
+  requireRoles([Role.USER, Role.ADMIN]),
+  validatePayload(createLeaveRequestSchema),
+  employeesController.createLeaveRequest,
+);
+
+//UPDATE METHODS
 employeesRouter.patch(
   "/:id",
-  requireRoles([Role.ADMIN, Role.MODERATOR]),
   validatePayload(updateEmployeeSchema),
   employeesController.updateEmployee,
+);
+employeesRouter.patch(
+  "/leave-request/:id",
+  validatePayload(updateLeaveRequestSchema),
+  employeesController.updateLeaveRequest,
+);
+
+//DELETE METHODS
+employeesRouter.delete("/:id", employeesController.deleteEmployee);
+
+employeesRouter.delete(
+  "/leave-request/:id",
+  employeesController.deleteLeaveRequest,
 );
 
 export default employeesRouter;

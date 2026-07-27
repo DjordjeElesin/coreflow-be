@@ -1,12 +1,25 @@
-import * as employeesService from "./employees.service";
+import * as employeesService from "./service";
 import { Request, Response } from "express";
 import { buildEmployeeDetailsDTO, buildEmployeeDTO } from "./employees.DTO";
-import { validateIdParam } from "@/utils/validationUtils/validationUtils";
+import { validateIdParam, validateJoiSchema } from "@/utils/validationUtils";
 import { sendResponse } from "@/utils/sendResponse";
 import { HttpStatusCode } from "@/types";
+import { employeeFiltersSchema } from "./employees.validation";
+import { BadRequestError } from "@/errors";
+import { getCurrentUser } from "@/utils/getCurrentUser";
 
-export const getEmployees = async (_req: Request, res: Response) => {
-  const employees = await employeesService.findAll();
+export const getEmployees = async (req: Request, res: Response) => {
+  const { error, value: filters } = validateJoiSchema(
+    employeeFiltersSchema,
+    req.query,
+  );
+
+  if (error) {
+    const message = error.details.map(({ message }) => message).join(",\n");
+    throw new BadRequestError(message);
+  }
+
+  const employees = await employeesService.find(filters);
   sendResponse({
     res,
     statusCode: HttpStatusCode.OK,
@@ -27,9 +40,20 @@ export const getEmployee = async (req: Request, res: Response) => {
   });
 };
 
+export const createEmployee = async (req: Request, res: Response) => {
+  const employee = await employeesService.create(req.body);
+
+  sendResponse({
+    res,
+    statusCode: HttpStatusCode.CREATED,
+    data: buildEmployeeDTO(employee),
+  });
+};
+
 export const updateEmployee = async (req: Request, res: Response) => {
   const id = validateIdParam(req.params.id);
-  const employee = await employeesService.update(id, req.body);
+  const currentUser = getCurrentUser(req);
+  const employee = await employeesService.update(id, req.body, currentUser);
   const leaveRequests =
     await employeesService.findLeaveRequestsByEmployeeId(id);
 
@@ -38,4 +62,45 @@ export const updateEmployee = async (req: Request, res: Response) => {
     statusCode: HttpStatusCode.OK,
     data: buildEmployeeDetailsDTO(employee, leaveRequests),
   });
+};
+
+export const deleteEmployee = async (req: Request, res: Response) => {
+  const id = validateIdParam(req.params.id);
+  await employeesService.deleteEmployee(id);
+
+  sendResponse({ res, statusCode: HttpStatusCode.NO_CONTENT });
+};
+
+export const createLeaveRequest = async (req: Request, res: Response) => {
+  const id = validateIdParam(req.params.id);
+  const currentUser = getCurrentUser(req);
+
+  const leaveRequest = await employeesService.createLeaveRequestByEmployeeId(
+    id,
+    req.body,
+    currentUser,
+  );
+
+  sendResponse({ res, statusCode: HttpStatusCode.CREATED, data: leaveRequest });
+};
+
+export const updateLeaveRequest = async (req: Request, res: Response) => {
+  const leaveRequestId = validateIdParam(req.params.id);
+  const currentUser = getCurrentUser(req);
+
+  const updated = await employeesService.updateLeaveRequest(
+    leaveRequestId,
+    req.body,
+    currentUser,
+  );
+
+  sendResponse({ res, statusCode: HttpStatusCode.OK, data: updated });
+};
+
+export const deleteLeaveRequest = async (req: Request, res: Response) => {
+  const leaveRequestId = validateIdParam(req.params.id);
+  const currentUser = getCurrentUser(req);
+  await employeesService.deleteLeaveRequest(leaveRequestId, currentUser);
+
+  sendResponse({ res, statusCode: HttpStatusCode.NO_CONTENT });
 };

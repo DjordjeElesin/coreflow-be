@@ -1,0 +1,1 @@
+export { assertEditableFieldsAccess } from "./assertEditableFieldsAccess";

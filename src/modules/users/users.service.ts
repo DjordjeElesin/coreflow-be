@@ -1,34 +1,23 @@
 import prisma from "@/config/database";
 import { Prisma } from "@/config/generated/client";
-import { ConflictError, NotFoundError } from "@/errors";
-import { TUserFilters } from "./users.validation";
-import { findUniqueByEmail } from "../auth/auth.service";
+import { BadRequestError, ForbiddenError, NotFoundError } from "@/errors";
+import {
+  TChangePasswordPayload,
+  TCreateUserPayload,
+  TUpdateUserPayload,
+  TUserFilters,
+  USER_EDITABLE_FIELDS_BY_ROLE,
+} from "./users.validation";
+import { buildUserCreateData, buildUserWhere } from "./users.utils";
+import { assertEditableFieldsAccess } from "@/utils/assertEditableFieldsAccess";
+import { TAuthUser } from "@/types";
 import bcrypt from "bcrypt";
+import { ERROR_MSGS } from "@/constants";
 
 const userArgs = {
   omit: { password: true, addressId: true, deletedAt: true, updatedAt: true },
   include: { address: true },
 } satisfies Prisma.UserDefaultArgs;
-
-const buildUserWhere = (filters: TUserFilters): Prisma.UserWhereInput => {
-  const { email, role, gender, city, country, state, street } = filters;
-
-  const hasAddressFilter = Boolean(city || country || state || street);
-  const addressFilter: Prisma.AddressWhereInput = {
-    city: city ? { contains: city, mode: "insensitive" } : undefined,
-    country: country ? { contains: country, mode: "insensitive" } : undefined,
-    state: state ? { contains: state, mode: "insensitive" } : undefined,
-    street: street ? { contains: street, mode: "insensitive" } : undefined,
-  };
-
-  return {
-    deletedAt: null,
-    email: email ? { contains: email, mode: "insensitive" } : undefined,
-    role,
-    gender,
-    address: hasAddressFilter ? addressFilter : undefined,
-  };
-};
 
 export const find = async (filters: TUserFilters) =>
   prisma.user.findMany({ where: buildUserWhere(filters), ...userArgs });
@@ -42,14 +31,64 @@ export const findById = async (id: number) => {
   return user;
 };
 
-export const post = async (user: Prisma.UserUncheckedCreateInput) => {
-  const existing = await findUniqueByEmail(user.email);
-  if (existing) throw new ConflictError("Email already in use");
-
-  const hashedPassword = await bcrypt.hash(user.password, 10);
-
-  const newUser = await prisma.user.create({
-    data: { ...user, password: hashedPassword },
+export const post = async (user: TCreateUserPayload) =>
+  prisma.user.create({
+    data: await buildUserCreateData(user),
+    ...userArgs,
   });
-  return newUser;
+
+export const update = async (
+  id: number,
+  user: TUpdateUserPayload,
+  currentUser: TAuthUser,
+) => {
+  assertEditableFieldsAccess(
+    USER_EDITABLE_FIELDS_BY_ROLE,
+    user,
+    currentUser.role,
+  );
+
+  const { address, ...rest } = user;
+  const updatedUser = await prisma.user.update({
+    where: { id, deletedAt: null },
+    data: {
+      ...rest,
+      address: address && {
+        upsert: {
+          create: address,
+          update: address,
+        },
+      },
+    },
+  });
+  return updatedUser;
+};
+
+export const deleteUser = async (id: number) =>
+  prisma.user.update({
+    where: { id },
+    data: { deletedAt: new Date().toISOString() },
+  });
+
+export const changePassword = async (
+  id: number,
+  payload: TChangePasswordPayload,
+  currentUser: TAuthUser,
+) => {
+  if (id !== currentUser.id)
+    throw new ForbiddenError(ERROR_MSGS.no_permission_action);
+
+  const user = await prisma.user.findFirst({ where: { id, deletedAt: null } });
+  if (!user) throw new NotFoundError(`User ${id} not found`);
+
+  const { currentPassword, newPassword } = payload;
+
+  const isCurrentValid = await bcrypt.compare(currentPassword, user.password);
+  if (!isCurrentValid)
+    throw new BadRequestError("Current password is incorrect");
+
+  await prisma.user.update({
+    where: { id, deletedAt: null },
+    data: { password: await bcrypt.hash(newPassword, 10) },
+  });
 };

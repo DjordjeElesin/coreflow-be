@@ -1,5 +1,20 @@
-import { LeaveRequest } from "@/config/generated/client";
+import { LeaveRequest, Prisma } from "@/config/generated/client";
 import { TEmployeeResponseDTO, TEmployeeDbOutput } from "@/types";
+
+export const employeeSelect = {
+  id: true,
+  hireDate: true,
+  contractType: true,
+  leaveBalance: true,
+  salary: true,
+  user: {
+    omit: { password: true, addressId: true, deletedAt: true, updatedAt: true },
+    include: { address: true },
+  },
+  department: { select: { id: true, name: true } },
+  position: { select: { id: true, name: true } },
+  lastLeaveResetYear: true,
+} satisfies Prisma.EmployeeSelect;
 
 export const buildEmployeeDTO = (
   data: TEmployeeDbOutput,

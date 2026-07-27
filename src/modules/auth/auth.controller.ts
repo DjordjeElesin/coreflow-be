@@ -8,6 +8,7 @@ import {
   setAccessTokenCookie,
   setRefreshTokenCookie,
 } from "@/utils/setAuthCookies";
+import { ERROR_MSGS } from "@/constants";
 
 export const login = async (req: Request, res: Response) => {
   const { accessToken, refreshToken } = await authService.authenticate(
@@ -49,7 +50,7 @@ export const logout = async (req: Request, res: Response) => {
 };
 
 export const getMe = async (req: Request, res: Response) => {
-  if (!req.user) throw new UnauthorizedError("Authentication required.");
+  if (!req.user) throw new UnauthorizedError(ERROR_MSGS.authorization_required);
   const user = await usersService.findById(req.user.id);
 
   sendResponse({ res, statusCode: HttpStatusCode.OK, data: user });
