@@ -6,8 +6,17 @@ export const JOI_VALIDATION_OPTIONS = {
   stripUnknown: true,
 } as const;
 
-export const validateJoiSchema = (schema: ObjectSchema, toValidate: unknown) =>
-  schema.validate(toValidate, JOI_VALIDATION_OPTIONS);
+export const validateJoiSchema = (
+  schema: ObjectSchema,
+  toValidate: unknown,
+) => {
+  const { error, value } = schema.validate(toValidate, JOI_VALIDATION_OPTIONS);
+  if (error) {
+    const message = error.details.map(({ message }) => message).join(",\n");
+    throw new BadRequestError(message);
+  }
+  return value;
+};
 
 export const validateIdParam = (checkId: string | string[]) => {
   const id = Number(checkId);

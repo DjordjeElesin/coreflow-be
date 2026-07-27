@@ -11,15 +11,7 @@ import { HttpStatusCode } from "@/types";
 import { getCurrentUser } from "@/utils/getCurrentUser";
 
 export const getUsers = async (req: Request, res: Response) => {
-  const { error, value: filters } = validateJoiSchema(
-    userFiltersSchema,
-    req.query,
-  );
-
-  if (error) {
-    const message = error.details.map(({ message }) => message).join(",\n");
-    throw new BadRequestError(message);
-  }
+  const filters = validateJoiSchema(userFiltersSchema, req.query);
   const users = await usersService.find(filters);
 
   sendResponse({ res, statusCode: HttpStatusCode.OK, data: users });
@@ -33,7 +25,7 @@ export const getUser = async (req: Request, res: Response) => {
 };
 
 export const createUser = async (req: Request, res: Response) => {
-  const user = await usersService.post(req.body);
+  const user = await usersService.create(req.body);
   sendResponse({ res, statusCode: HttpStatusCode.CREATED, data: user });
 };
 

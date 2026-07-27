@@ -8,7 +8,7 @@ import {
   TUserFilters,
   USER_EDITABLE_FIELDS_BY_ROLE,
 } from "./users.validation";
-import { buildUserCreateData, buildUserWhere } from "./users.utils";
+import { buildUserCreateData, buildUserWhereClause } from "./users.utils";
 import { assertEditableFieldsAccess } from "@/utils/assertEditableFieldsAccess";
 import { TAuthUser } from "@/types";
 import bcrypt from "bcrypt";
@@ -20,18 +20,18 @@ const userArgs = {
 } satisfies Prisma.UserDefaultArgs;
 
 export const find = async (filters: TUserFilters) =>
-  prisma.user.findMany({ where: buildUserWhere(filters), ...userArgs });
+  prisma.user.findMany({ where: buildUserWhereClause(filters), ...userArgs });
 
 export const findById = async (id: number) => {
   const user = await prisma.user.findFirst({
     where: { id, deletedAt: null },
     ...userArgs,
   });
-  if (!user) throw new NotFoundError(`User ${id} not found`);
+  if (!user) throw new NotFoundError(`User with ID:${id} not found`);
   return user;
 };
 
-export const post = async (user: TCreateUserPayload) =>
+export const create = async (user: TCreateUserPayload) =>
   prisma.user.create({
     data: await buildUserCreateData(user),
     ...userArgs,

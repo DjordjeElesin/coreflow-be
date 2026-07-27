@@ -9,7 +9,7 @@ import * as employeesCoreService from "./employees.core.service";
 import { getLeaveDurationInDays } from "../employees.utils";
 import prisma from "@/config/database";
 import { LeaveRequestStatus, Role } from "@/config/generated/enums";
-import { assertPermissionToManage } from "@/utils/assertPermissionToManage";
+import { assertPermissionToManageUser } from "@/utils/assertPermissionToManageUser";
 
 export const findLeaveRequestsByEmployeeId = async (id: number) =>
   prisma.leaveRequest.findMany({ where: { employeeId: id } });
@@ -57,7 +57,7 @@ export const updateLeaveRequest = async (
   if (!leaveRequest) throw new BadRequestError("Leave request does not exist");
 
   const employee = await employeesCoreService.findById(leaveRequest.employeeId);
-  assertPermissionToManage(currentUser, {
+  assertPermissionToManageUser(currentUser, {
     id: employee.id,
     role: employee.user.role,
   });
@@ -107,7 +107,7 @@ export const deleteLeaveRequest = async (
   if (!leaveRequest) throw new BadRequestError("Leave request does not exist");
 
   const employee = await employeesCoreService.findById(leaveRequest.employeeId);
-  assertPermissionToManage(currentUser, {
+  assertPermissionToManageUser(currentUser, {
     id: employee.id,
     role: employee.user.role,
   });
