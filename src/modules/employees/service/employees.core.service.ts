@@ -7,13 +7,13 @@ import {
   TEmployeeFilters,
 } from "../employees.validation";
 import { buildUserCreateData } from "../../users/users.utils";
-import { buildEmployeeWhere } from "../employees.utils";
-import { assertPermissionToManage } from "@/utils/assertPermissionToManage";
+import { buildEmployeeWhereClause } from "../employees.utils";
+import { assertPermissionToManageUser } from "@/utils/assertPermissionToManageUser";
 import { employeeSelect } from "../employees.DTO";
 
 export const find = async (filters: TEmployeeFilters) =>
   prisma.employee.findMany({
-    where: buildEmployeeWhere(filters),
+    where: buildEmployeeWhereClause(filters),
     select: employeeSelect,
   });
 
@@ -25,7 +25,7 @@ export const findById = async (id: number): Promise<TEmployeeDbOutput> => {
     },
     select: employeeSelect,
   });
-  if (!employee) throw new NotFoundError(`Employee ${id} not found`);
+  if (!employee) throw new NotFoundError(`Employee with ID:${id} not found`);
   return employee;
 };
 
@@ -57,7 +57,7 @@ export const update = async (
   currentUser: TAuthUser,
 ) => {
   const target = await findById(id);
-  assertPermissionToManage(currentUser, { id, role: target.user.role });
+  assertPermissionToManageUser(currentUser, { id, role: target.user.role });
 
   return prisma.employee.update({
     where: { id, user: { deletedAt: null } },

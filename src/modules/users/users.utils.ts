@@ -4,7 +4,7 @@ import { findUniqueByEmail } from "../auth/auth.service";
 import { ConflictError } from "@/errors";
 import bcrypt from "bcrypt";
 
-export const buildUserWhere = (
+export const buildUserWhereClause = (
   filters: TUserFilters,
 ): Prisma.UserWhereInput => {
   const { email, role, gender, city, country, state, street } = filters;

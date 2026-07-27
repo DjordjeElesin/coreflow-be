@@ -44,3 +44,10 @@ export type TEmployeeDbOutput = Prisma.EmployeeGetPayload<{
 export type TUserFields = TEmployeeDbOutput["user"];
 export type TEmployeeResponseDTO = Omit<TEmployeeDbOutput, "user"> &
   TUserFields;
+
+export enum TStockLevels {
+  IN_STOCK = "in-stock",
+  LOW_STOCK = "low-stock",
+  ALMOST_SOLD_OUT = "almost-sold-out",
+  OUT_OF_STOCK = "out-of-stock",
+}

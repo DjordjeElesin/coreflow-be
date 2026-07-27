@@ -9,7 +9,7 @@ const ROLE_RANK: Record<Role, number> = {
   [Role.USER]: 1,
 };
 
-export const assertPermissionToManage = (
+export const assertPermissionToManageUser = (
   initiator: TAuthUser,
   target: TAuthUser,
 ) => {

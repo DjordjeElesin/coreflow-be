@@ -1,0 +1,29 @@
+import { Router } from "express";
+import * as productsController from "./products.controller";
+import { validatePayload } from "@/middleware/validate";
+import { updateProductSchema } from "./products.validation";
+import { requireRoles } from "@/middleware/authorizaton";
+import { Role } from "@/config/generated/enums";
+
+const productsRouter = Router();
+
+//GET METHODS
+productsRouter.get("/", productsController.getProducts);
+productsRouter.get("/:id", productsController.getProductById);
+
+//PATCH METHODS
+productsRouter.patch(
+  "/:id",
+  requireRoles([Role.ADMIN]),
+  validatePayload(updateProductSchema),
+  productsController.updateProduct,
+);
+
+//DELETE METHODS
+productsRouter.delete(
+  "/:id",
+  requireRoles([Role.ADMIN]),
+  productsController.deleteProduct,
+);
+
+export default productsRouter;
