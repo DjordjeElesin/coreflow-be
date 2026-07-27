@@ -1,6 +1,6 @@
 import { Prisma } from "@/config/generated/client";
-import { ContractType, Gender, Role } from "@/config/generated/enums";
-import { employeeSelect } from "@/modules/employees/employees.service";
+import { Role } from "@/config/generated/enums";
+import { employeeSelect } from "@/modules/employees/employees.DTO";
 
 export enum HttpStatusCode {
   OK = 200,
@@ -20,7 +20,7 @@ export type TLoginPayload = {
   password: string;
 };
 
-// Shape of the JWT payload / the authenticated user attached to req.user.
+// Shape of the JWT payload / req.user
 export type TAuthUser = {
   id: number;
   role: Role;

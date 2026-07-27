@@ -1,1 +1,1 @@
-export * from "./validationUtils";
+export { validateIdParam, validateJoiSchema } from "./validationUtils";

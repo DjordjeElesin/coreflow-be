@@ -1,0 +1,1 @@
+export { assertPermissionToManage } from "./assertPermissionToManage";

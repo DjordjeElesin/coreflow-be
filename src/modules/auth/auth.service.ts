@@ -1,6 +1,7 @@
 import prisma from "@/config/database";
 import env from "@/config/env";
 import { Role } from "@/config/generated/enums";
+import { ERROR_MSGS } from "@/constants";
 import { UnauthorizedError } from "@/errors";
 import { TLoginPayload } from "@/types";
 import {
@@ -65,7 +66,7 @@ export const exchangeTokens = async (refreshToken: string) => {
       id: number;
     };
   } catch {
-    throw new UnauthorizedError("Invalid or expired refresh token");
+    throw new UnauthorizedError(ERROR_MSGS.invalid_refresh_token);
   }
 
   const storedRefresh = await prisma.refreshToken.findUnique({
@@ -77,14 +78,14 @@ export const exchangeTokens = async (refreshToken: string) => {
     storedRefresh.revoked ||
     storedRefresh.expiresAt < new Date()
   )
-    throw new UnauthorizedError("Invalid or expired refresh token");
+    throw new UnauthorizedError(ERROR_MSGS.invalid_refresh_token);
 
   const user = await prisma.user.findFirst({
     where: { id: payload.id, deletedAt: null },
     select: { id: true, role: true },
   });
 
-  if (!user) throw new UnauthorizedError("User no longer exists");
+  if (!user) throw new UnauthorizedError(ERROR_MSGS.user_not_exist);
 
   return generateAccessToken(user.id, user.role);
 };
