@@ -24,7 +24,7 @@ export const findById = async (id: number) => {
     include: productInclude,
     omit: { categoryId: true },
   });
-  if (!product) throw new NotFoundError(`Product with ID:${id} not found`);
+  if (!product) throw new NotFoundError(`Product with ID:${id} not found.`);
   return product;
 };
 

@@ -25,7 +25,7 @@ export const findById = async (id: number): Promise<TEmployeeDbOutput> => {
     },
     select: employeeSelect,
   });
-  if (!employee) throw new NotFoundError(`Employee with ID:${id} not found`);
+  if (!employee) throw new NotFoundError(`Employee with ID:${id} not found.`);
   return employee;
 };
 

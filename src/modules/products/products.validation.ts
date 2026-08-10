@@ -1,14 +1,14 @@
 import { Prisma } from "@/config/generated/client";
-import { TStockLevels } from "@/types";
+import { ESortOrder, EStockLevels } from "@/types";
 import Joi from "joi";
 
 export type TProductFilters = {
   name?: string;
   brand?: string;
   categoryId?: number;
-  stock?: TStockLevels;
+  stock?: EStockLevels;
   sortBy: "name" | "brand" | "category" | "stock";
-  sortOrder: "desc" | "asc";
+  sortOrder: ESortOrder;
 };
 
 export type TUpdateProductPayload = Prisma.ProductUncheckedUpdateInput;
@@ -22,13 +22,16 @@ export const productFiltersSchema = Joi.object<TProductFilters>({
   brand: Joi.string().optional(),
   categoryId: Joi.number().optional(),
   stock: Joi.string()
-    .valid(...Object.values(TStockLevels))
+    .valid(...Object.values(EStockLevels))
     .optional(),
   sortBy: Joi.string()
     .valid("name", "brand", "category", "stock")
     .optional()
     .default("name"),
-  sortOrder: Joi.string().valid("desc", "asc").optional().default("asc"),
+  sortOrder: Joi.string()
+    .valid(...Object.values(ESortOrder))
+    .optional()
+    .default("asc"),
 });
 
 export const updateProductSchema = Joi.object<TUpdateProductPayload>({

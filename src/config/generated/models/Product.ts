@@ -32,6 +32,7 @@ export type ProductAvgAggregateOutputType = {
   discountPercentage: number | null
   rating: number | null
   stock: number | null
+  reserved: number | null
   categoryId: number | null
 }
 
@@ -41,6 +42,7 @@ export type ProductSumAggregateOutputType = {
   discountPercentage: number | null
   rating: number | null
   stock: number | null
+  reserved: number | null
   categoryId: number | null
 }
 
@@ -52,6 +54,7 @@ export type ProductMinAggregateOutputType = {
   discountPercentage: number | null
   rating: number | null
   stock: number | null
+  reserved: number | null
   brand: string | null
   sku: string | null
   thumbnail: string | null
@@ -73,6 +76,7 @@ export type ProductMaxAggregateOutputType = {
   discountPercentage: number | null
   rating: number | null
   stock: number | null
+  reserved: number | null
   brand: string | null
   sku: string | null
   thumbnail: string | null
@@ -94,6 +98,7 @@ export type ProductCountAggregateOutputType = {
   discountPercentage: number
   rating: number
   stock: number
+  reserved: number
   brand: number
   sku: number
   images: number
@@ -116,6 +121,7 @@ export type ProductAvgAggregateInputType = {
   discountPercentage?: true
   rating?: true
   stock?: true
+  reserved?: true
   categoryId?: true
 }
 
@@ -125,6 +131,7 @@ export type ProductSumAggregateInputType = {
   discountPercentage?: true
   rating?: true
   stock?: true
+  reserved?: true
   categoryId?: true
 }
 
@@ -136,6 +143,7 @@ export type ProductMinAggregateInputType = {
   discountPercentage?: true
   rating?: true
   stock?: true
+  reserved?: true
   brand?: true
   sku?: true
   thumbnail?: true
@@ -157,6 +165,7 @@ export type ProductMaxAggregateInputType = {
   discountPercentage?: true
   rating?: true
   stock?: true
+  reserved?: true
   brand?: true
   sku?: true
   thumbnail?: true
@@ -178,6 +187,7 @@ export type ProductCountAggregateInputType = {
   discountPercentage?: true
   rating?: true
   stock?: true
+  reserved?: true
   brand?: true
   sku?: true
   images?: true
@@ -287,6 +297,7 @@ export type ProductGroupByOutputType = {
   discountPercentage: number
   rating: number
   stock: number
+  reserved: number
   brand: string
   sku: string
   images: string[]
@@ -332,6 +343,7 @@ export type ProductWhereInput = {
   discountPercentage?: Prisma.FloatFilter<"Product"> | number
   rating?: Prisma.FloatFilter<"Product"> | number
   stock?: Prisma.IntFilter<"Product"> | number
+  reserved?: Prisma.IntFilter<"Product"> | number
   brand?: Prisma.StringFilter<"Product"> | string
   sku?: Prisma.StringFilter<"Product"> | string
   images?: Prisma.StringNullableListFilter<"Product">
@@ -356,6 +368,7 @@ export type ProductOrderByWithRelationInput = {
   discountPercentage?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  reserved?: Prisma.SortOrder
   brand?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   images?: Prisma.SortOrder
@@ -383,6 +396,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   discountPercentage?: Prisma.FloatFilter<"Product"> | number
   rating?: Prisma.FloatFilter<"Product"> | number
   stock?: Prisma.IntFilter<"Product"> | number
+  reserved?: Prisma.IntFilter<"Product"> | number
   brand?: Prisma.StringFilter<"Product"> | string
   sku?: Prisma.StringFilter<"Product"> | string
   images?: Prisma.StringNullableListFilter<"Product">
@@ -407,6 +421,7 @@ export type ProductOrderByWithAggregationInput = {
   discountPercentage?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  reserved?: Prisma.SortOrder
   brand?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   images?: Prisma.SortOrder
@@ -437,6 +452,7 @@ export type ProductScalarWhereWithAggregatesInput = {
   discountPercentage?: Prisma.FloatWithAggregatesFilter<"Product"> | number
   rating?: Prisma.FloatWithAggregatesFilter<"Product"> | number
   stock?: Prisma.IntWithAggregatesFilter<"Product"> | number
+  reserved?: Prisma.IntWithAggregatesFilter<"Product"> | number
   brand?: Prisma.StringWithAggregatesFilter<"Product"> | string
   sku?: Prisma.StringWithAggregatesFilter<"Product"> | string
   images?: Prisma.StringNullableListFilter<"Product">
@@ -458,6 +474,7 @@ export type ProductCreateInput = {
   discountPercentage: number
   rating: number
   stock: number
+  reserved?: number
   brand: string
   sku: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -481,6 +498,7 @@ export type ProductUncheckedCreateInput = {
   discountPercentage: number
   rating: number
   stock: number
+  reserved?: number
   brand: string
   sku: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -503,6 +521,7 @@ export type ProductUpdateInput = {
   discountPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved?: Prisma.IntFieldUpdateOperationsInput | number
   brand?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -526,6 +545,7 @@ export type ProductUncheckedUpdateInput = {
   discountPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved?: Prisma.IntFieldUpdateOperationsInput | number
   brand?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -549,6 +569,7 @@ export type ProductCreateManyInput = {
   discountPercentage: number
   rating: number
   stock: number
+  reserved?: number
   brand: string
   sku: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -570,6 +591,7 @@ export type ProductUpdateManyMutationInput = {
   discountPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved?: Prisma.IntFieldUpdateOperationsInput | number
   brand?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -591,6 +613,7 @@ export type ProductUncheckedUpdateManyInput = {
   discountPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved?: Prisma.IntFieldUpdateOperationsInput | number
   brand?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -636,6 +659,7 @@ export type ProductCountOrderByAggregateInput = {
   discountPercentage?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  reserved?: Prisma.SortOrder
   brand?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   images?: Prisma.SortOrder
@@ -656,6 +680,7 @@ export type ProductAvgOrderByAggregateInput = {
   discountPercentage?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  reserved?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
 }
 
@@ -667,6 +692,7 @@ export type ProductMaxOrderByAggregateInput = {
   discountPercentage?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  reserved?: Prisma.SortOrder
   brand?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
@@ -688,6 +714,7 @@ export type ProductMinOrderByAggregateInput = {
   discountPercentage?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  reserved?: Prisma.SortOrder
   brand?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
@@ -707,6 +734,7 @@ export type ProductSumOrderByAggregateInput = {
   discountPercentage?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  reserved?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
 }
 
@@ -782,6 +810,7 @@ export type ProductCreateWithoutOrderItemsInput = {
   discountPercentage: number
   rating: number
   stock: number
+  reserved?: number
   brand: string
   sku: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -804,6 +833,7 @@ export type ProductUncheckedCreateWithoutOrderItemsInput = {
   discountPercentage: number
   rating: number
   stock: number
+  reserved?: number
   brand: string
   sku: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -841,6 +871,7 @@ export type ProductUpdateWithoutOrderItemsInput = {
   discountPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved?: Prisma.IntFieldUpdateOperationsInput | number
   brand?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -863,6 +894,7 @@ export type ProductUncheckedUpdateWithoutOrderItemsInput = {
   discountPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved?: Prisma.IntFieldUpdateOperationsInput | number
   brand?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -884,6 +916,7 @@ export type ProductCreateWithoutCategoryInput = {
   discountPercentage: number
   rating: number
   stock: number
+  reserved?: number
   brand: string
   sku: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -906,6 +939,7 @@ export type ProductUncheckedCreateWithoutCategoryInput = {
   discountPercentage: number
   rating: number
   stock: number
+  reserved?: number
   brand: string
   sku: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -957,6 +991,7 @@ export type ProductScalarWhereInput = {
   discountPercentage?: Prisma.FloatFilter<"Product"> | number
   rating?: Prisma.FloatFilter<"Product"> | number
   stock?: Prisma.IntFilter<"Product"> | number
+  reserved?: Prisma.IntFilter<"Product"> | number
   brand?: Prisma.StringFilter<"Product"> | string
   sku?: Prisma.StringFilter<"Product"> | string
   images?: Prisma.StringNullableListFilter<"Product">
@@ -979,6 +1014,7 @@ export type ProductCreateManyCategoryInput = {
   discountPercentage: number
   rating: number
   stock: number
+  reserved?: number
   brand: string
   sku: string
   images?: Prisma.ProductCreateimagesInput | string[]
@@ -999,6 +1035,7 @@ export type ProductUpdateWithoutCategoryInput = {
   discountPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved?: Prisma.IntFieldUpdateOperationsInput | number
   brand?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -1021,6 +1058,7 @@ export type ProductUncheckedUpdateWithoutCategoryInput = {
   discountPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved?: Prisma.IntFieldUpdateOperationsInput | number
   brand?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -1043,6 +1081,7 @@ export type ProductUncheckedUpdateManyWithoutCategoryInput = {
   discountPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved?: Prisma.IntFieldUpdateOperationsInput | number
   brand?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.ProductUpdateimagesInput | string[]
@@ -1095,6 +1134,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   discountPercentage?: boolean
   rating?: boolean
   stock?: boolean
+  reserved?: boolean
   brand?: boolean
   sku?: boolean
   images?: boolean
@@ -1120,6 +1160,7 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   discountPercentage?: boolean
   rating?: boolean
   stock?: boolean
+  reserved?: boolean
   brand?: boolean
   sku?: boolean
   images?: boolean
@@ -1143,6 +1184,7 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   discountPercentage?: boolean
   rating?: boolean
   stock?: boolean
+  reserved?: boolean
   brand?: boolean
   sku?: boolean
   images?: boolean
@@ -1166,6 +1208,7 @@ export type ProductSelectScalar = {
   discountPercentage?: boolean
   rating?: boolean
   stock?: boolean
+  reserved?: boolean
   brand?: boolean
   sku?: boolean
   images?: boolean
@@ -1180,7 +1223,7 @@ export type ProductSelectScalar = {
   categoryId?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "discountPercentage" | "rating" | "stock" | "brand" | "sku" | "images" | "thumbnail" | "createdAt" | "updatedAt" | "barCode" | "qrCode" | "warrantyInformation" | "shippingInformation" | "returnPolicy" | "categoryId", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "discountPercentage" | "rating" | "stock" | "reserved" | "brand" | "sku" | "images" | "thumbnail" | "createdAt" | "updatedAt" | "barCode" | "qrCode" | "warrantyInformation" | "shippingInformation" | "returnPolicy" | "categoryId", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.ProductCategoryDefaultArgs<ExtArgs>
   orderItems?: boolean | Prisma.Product$orderItemsArgs<ExtArgs>
@@ -1207,6 +1250,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     discountPercentage: number
     rating: number
     stock: number
+    reserved: number
     brand: string
     sku: string
     images: string[]
@@ -1651,6 +1695,7 @@ export interface ProductFieldRefs {
   readonly discountPercentage: Prisma.FieldRef<"Product", 'Float'>
   readonly rating: Prisma.FieldRef<"Product", 'Float'>
   readonly stock: Prisma.FieldRef<"Product", 'Int'>
+  readonly reserved: Prisma.FieldRef<"Product", 'Int'>
   readonly brand: Prisma.FieldRef<"Product", 'String'>
   readonly sku: Prisma.FieldRef<"Product", 'String'>
   readonly images: Prisma.FieldRef<"Product", 'String[]'>

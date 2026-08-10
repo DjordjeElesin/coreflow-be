@@ -1,6 +1,7 @@
 import { Prisma } from "@/config/generated/client";
 import { Role } from "@/config/generated/enums";
 import { employeeSelect } from "@/modules/employees/employees.DTO";
+import { orderDetailsSelect, orderSelect } from "@/modules/orders/orders.DTO";
 
 export enum HttpStatusCode {
   OK = 200,
@@ -15,12 +16,16 @@ export enum HttpStatusCode {
   INTERNAL_SERVER = 500,
 }
 
+export enum ESortOrder {
+  ASC = "asc",
+  DESC = "desc",
+}
+
 export type TLoginPayload = {
   email: string;
   password: string;
 };
 
-// Shape of the JWT payload / req.user
 export type TAuthUser = {
   id: number;
   role: Role;
@@ -42,12 +47,25 @@ export type TEmployeeDbOutput = Prisma.EmployeeGetPayload<{
 }>;
 
 export type TUserFields = TEmployeeDbOutput["user"];
-export type TEmployeeResponseDTO = Omit<TEmployeeDbOutput, "user"> &
-  TUserFields;
+export type TEmployeeDTO = Omit<TEmployeeDbOutput, "user"> & TUserFields;
 
-export enum TStockLevels {
+export enum EStockLevels {
   IN_STOCK = "in-stock",
   LOW_STOCK = "low-stock",
   ALMOST_SOLD_OUT = "almost-sold-out",
   OUT_OF_STOCK = "out-of-stock",
 }
+
+export type TOrderDbOutput = Prisma.OrderGetPayload<{
+  select: typeof orderSelect;
+}>;
+export type TOrderDetailsDbOutput = Prisma.OrderGetPayload<{
+  select: typeof orderDetailsSelect;
+}>;
+
+export type TOrderDTO = Omit<TOrderDbOutput, "orderItems"> & {
+  discountedTotal: number;
+};
+export type TOrderDetailsDTO = TOrderDbOutput & {
+  discountedTotal: number;
+};

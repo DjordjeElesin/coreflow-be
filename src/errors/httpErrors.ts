@@ -2,8 +2,8 @@ import { HttpStatusCode } from "@/types";
 import { BaseError } from "./BaseError";
 
 export class BadRequestError extends BaseError {
-  constructor(message = "Bad request") {
-    super("BadRequestError", HttpStatusCode.BAD_REQUEST, message);
+  constructor(message = "Bad request", data?: unknown) {
+    super("BadRequestError", HttpStatusCode.BAD_REQUEST, message, true, data);
   }
 }
 

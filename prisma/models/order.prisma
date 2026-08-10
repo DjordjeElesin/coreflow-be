@@ -1,6 +1,6 @@
 model Order {
     id          Int         @id @default(autoincrement())
-    orderNumber Int         @unique
+    orderNumber String      @unique
     customerId  Int
     customer    Customer    @relation(fields: [customerId], references: [id])
     status      OrderStatus

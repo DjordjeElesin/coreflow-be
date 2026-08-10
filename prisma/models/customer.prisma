@@ -1,10 +1,17 @@
 model Customer {
-    id        Int      @id @default(autoincrement())
-    name      String
+    id        Int            @id @default(autoincrement())
+    firstName String
+    lastName  String
     email     String
     phone     String
-    addressId Int?     @unique
-    address   Address? @relation(fields: [addressId], references: [id])
+    gender    Gender?
+    birthDate DateTime?      @db.Date
+    addressId Int?           @unique
+    address   Address?       @relation(fields: [addressId], references: [id])
+    type      CustomerType   @default(INDIVIDUAL)
+    status    CustomerStatus @default(ACTIVE)
+    notes     String?
+    company   String?
     orders    Order[]
 
     @@map("customers")

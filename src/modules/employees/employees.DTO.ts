@@ -1,5 +1,5 @@
 import { LeaveRequest, Prisma } from "@/config/generated/client";
-import { TEmployeeResponseDTO, TEmployeeDbOutput } from "@/types";
+import { TEmployeeDTO, TEmployeeDbOutput } from "@/types";
 
 export const employeeSelect = {
   id: true,
@@ -18,7 +18,7 @@ export const employeeSelect = {
 
 export const buildEmployeeDTO = (
   data: TEmployeeDbOutput,
-): TEmployeeResponseDTO => {
+): TEmployeeDTO => {
   const { user, ...rest } = data;
   return {
     ...rest,

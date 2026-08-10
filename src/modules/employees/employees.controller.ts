@@ -9,21 +9,13 @@ import { BadRequestError } from "@/errors";
 import { getCurrentUser } from "@/utils/getCurrentUser";
 
 export const getEmployees = async (req: Request, res: Response) => {
-  const { error, value: filters } = validateJoiSchema(
-    employeeFiltersSchema,
-    req.query,
-  );
-
-  if (error) {
-    const message = error.details.map(({ message }) => message).join(",\n");
-    throw new BadRequestError(message);
-  }
+  const filters = validateJoiSchema(employeeFiltersSchema, req.query);
 
   const employees = await employeesService.find(filters);
   sendResponse({
     res,
     statusCode: HttpStatusCode.OK,
-    data: employees.map((employee) => buildEmployeeDTO(employee)),
+    data: employees.map(buildEmployeeDTO),
   });
 };
 

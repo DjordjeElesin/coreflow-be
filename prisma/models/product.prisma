@@ -14,6 +14,7 @@ model Product {
     discountPercentage  Float
     rating              Float
     stock               Int
+    reserved            Int             @default(0)
     brand               String
     sku                 String
     images              String[]

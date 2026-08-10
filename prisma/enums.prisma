@@ -23,6 +23,7 @@ enum LeaveRequestType {
     MATERNITY
     UNPAID
 }
+
 enum LeaveRequestStatus {
     PENDING
     APPROVED
@@ -35,4 +36,16 @@ enum OrderStatus {
     SHIPPED
     DELIVERED
     CANCELLED
+}
+
+enum CustomerType {
+    INDIVIDUAL
+    COMPANY
+}
+
+enum CustomerStatus {
+    ACTIVE
+    INACTIVE
+    LEAD
+    BLOCKED
 }
