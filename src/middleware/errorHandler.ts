@@ -13,7 +13,12 @@ export const errorHandler = (
 ) => {
   if (err instanceof BaseError && err.isOperational) {
     logger.warn(`${err.name}: ${err.message}`);
-    sendResponse({ res, statusCode: err.httpCode, message: err.message });
+    sendResponse({
+      res,
+      statusCode: err.httpCode,
+      message: err.message,
+      data: err.data,
+    });
     return;
   }
 

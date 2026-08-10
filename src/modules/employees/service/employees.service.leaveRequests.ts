@@ -5,7 +5,7 @@ import {
 } from "../employees.validation";
 import { BadRequestError, ForbiddenError } from "@/errors";
 import { ERROR_MSGS } from "@/constants";
-import * as employeesCoreService from "./employees.core.service";
+import * as employeesCoreService from "./employees.service.core";
 import { getLeaveDurationInDays } from "../employees.utils";
 import prisma from "@/config/database";
 import { LeaveRequestStatus, Role } from "@/config/generated/enums";

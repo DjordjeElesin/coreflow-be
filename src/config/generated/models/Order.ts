@@ -28,21 +28,19 @@ export type AggregateOrder = {
 
 export type OrderAvgAggregateOutputType = {
   id: number | null
-  orderNumber: number | null
   customerId: number | null
   totalAmount: number | null
 }
 
 export type OrderSumAggregateOutputType = {
   id: number | null
-  orderNumber: number | null
   customerId: number | null
   totalAmount: number | null
 }
 
 export type OrderMinAggregateOutputType = {
   id: number | null
-  orderNumber: number | null
+  orderNumber: string | null
   customerId: number | null
   status: $Enums.OrderStatus | null
   createdAt: Date | null
@@ -52,7 +50,7 @@ export type OrderMinAggregateOutputType = {
 
 export type OrderMaxAggregateOutputType = {
   id: number | null
-  orderNumber: number | null
+  orderNumber: string | null
   customerId: number | null
   status: $Enums.OrderStatus | null
   createdAt: Date | null
@@ -74,14 +72,12 @@ export type OrderCountAggregateOutputType = {
 
 export type OrderAvgAggregateInputType = {
   id?: true
-  orderNumber?: true
   customerId?: true
   totalAmount?: true
 }
 
 export type OrderSumAggregateInputType = {
   id?: true
-  orderNumber?: true
   customerId?: true
   totalAmount?: true
 }
@@ -205,7 +201,7 @@ export type OrderGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type OrderGroupByOutputType = {
   id: number
-  orderNumber: number
+  orderNumber: string
   customerId: number
   status: $Enums.OrderStatus
   createdAt: Date
@@ -238,7 +234,7 @@ export type OrderWhereInput = {
   OR?: Prisma.OrderWhereInput[]
   NOT?: Prisma.OrderWhereInput | Prisma.OrderWhereInput[]
   id?: Prisma.IntFilter<"Order"> | number
-  orderNumber?: Prisma.IntFilter<"Order"> | number
+  orderNumber?: Prisma.StringFilter<"Order"> | string
   customerId?: Prisma.IntFilter<"Order"> | number
   status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -262,7 +258,7 @@ export type OrderOrderByWithRelationInput = {
 
 export type OrderWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  orderNumber?: number
+  orderNumber?: string
   AND?: Prisma.OrderWhereInput | Prisma.OrderWhereInput[]
   OR?: Prisma.OrderWhereInput[]
   NOT?: Prisma.OrderWhereInput | Prisma.OrderWhereInput[]
@@ -295,7 +291,7 @@ export type OrderScalarWhereWithAggregatesInput = {
   OR?: Prisma.OrderScalarWhereWithAggregatesInput[]
   NOT?: Prisma.OrderScalarWhereWithAggregatesInput | Prisma.OrderScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Order"> | number
-  orderNumber?: Prisma.IntWithAggregatesFilter<"Order"> | number
+  orderNumber?: Prisma.StringWithAggregatesFilter<"Order"> | string
   customerId?: Prisma.IntWithAggregatesFilter<"Order"> | number
   status?: Prisma.EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
@@ -304,7 +300,7 @@ export type OrderScalarWhereWithAggregatesInput = {
 }
 
 export type OrderCreateInput = {
-  orderNumber: number
+  orderNumber: string
   status: $Enums.OrderStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -315,7 +311,7 @@ export type OrderCreateInput = {
 
 export type OrderUncheckedCreateInput = {
   id?: number
-  orderNumber: number
+  orderNumber: string
   customerId: number
   status: $Enums.OrderStatus
   createdAt?: Date | string
@@ -325,7 +321,7 @@ export type OrderUncheckedCreateInput = {
 }
 
 export type OrderUpdateInput = {
-  orderNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -336,7 +332,7 @@ export type OrderUpdateInput = {
 
 export type OrderUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  orderNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -347,7 +343,7 @@ export type OrderUncheckedUpdateInput = {
 
 export type OrderCreateManyInput = {
   id?: number
-  orderNumber: number
+  orderNumber: string
   customerId: number
   status: $Enums.OrderStatus
   createdAt?: Date | string
@@ -356,7 +352,7 @@ export type OrderCreateManyInput = {
 }
 
 export type OrderUpdateManyMutationInput = {
-  orderNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -365,7 +361,7 @@ export type OrderUpdateManyMutationInput = {
 
 export type OrderUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  orderNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -395,7 +391,6 @@ export type OrderCountOrderByAggregateInput = {
 
 export type OrderAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  orderNumber?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
@@ -422,7 +417,6 @@ export type OrderMinOrderByAggregateInput = {
 
 export type OrderSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  orderNumber?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
@@ -493,7 +487,7 @@ export type OrderUpdateOneRequiredWithoutOrderItemsNestedInput = {
 }
 
 export type OrderCreateWithoutCustomerInput = {
-  orderNumber: number
+  orderNumber: string
   status: $Enums.OrderStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -503,7 +497,7 @@ export type OrderCreateWithoutCustomerInput = {
 
 export type OrderUncheckedCreateWithoutCustomerInput = {
   id?: number
-  orderNumber: number
+  orderNumber: string
   status: $Enums.OrderStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -542,7 +536,7 @@ export type OrderScalarWhereInput = {
   OR?: Prisma.OrderScalarWhereInput[]
   NOT?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
   id?: Prisma.IntFilter<"Order"> | number
-  orderNumber?: Prisma.IntFilter<"Order"> | number
+  orderNumber?: Prisma.StringFilter<"Order"> | string
   customerId?: Prisma.IntFilter<"Order"> | number
   status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -551,7 +545,7 @@ export type OrderScalarWhereInput = {
 }
 
 export type OrderCreateWithoutOrderItemsInput = {
-  orderNumber: number
+  orderNumber: string
   status: $Enums.OrderStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -561,7 +555,7 @@ export type OrderCreateWithoutOrderItemsInput = {
 
 export type OrderUncheckedCreateWithoutOrderItemsInput = {
   id?: number
-  orderNumber: number
+  orderNumber: string
   customerId: number
   status: $Enums.OrderStatus
   createdAt?: Date | string
@@ -586,7 +580,7 @@ export type OrderUpdateToOneWithWhereWithoutOrderItemsInput = {
 }
 
 export type OrderUpdateWithoutOrderItemsInput = {
-  orderNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -596,7 +590,7 @@ export type OrderUpdateWithoutOrderItemsInput = {
 
 export type OrderUncheckedUpdateWithoutOrderItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  orderNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -606,7 +600,7 @@ export type OrderUncheckedUpdateWithoutOrderItemsInput = {
 
 export type OrderCreateManyCustomerInput = {
   id?: number
-  orderNumber: number
+  orderNumber: string
   status: $Enums.OrderStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -614,7 +608,7 @@ export type OrderCreateManyCustomerInput = {
 }
 
 export type OrderUpdateWithoutCustomerInput = {
-  orderNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -624,7 +618,7 @@ export type OrderUpdateWithoutCustomerInput = {
 
 export type OrderUncheckedUpdateWithoutCustomerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  orderNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -634,7 +628,7 @@ export type OrderUncheckedUpdateWithoutCustomerInput = {
 
 export type OrderUncheckedUpdateManyWithoutCustomerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  orderNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -738,7 +732,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    orderNumber: number
+    orderNumber: string
     customerId: number
     status: $Enums.OrderStatus
     createdAt: Date
@@ -1170,7 +1164,7 @@ export interface Prisma__OrderClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface OrderFieldRefs {
   readonly id: Prisma.FieldRef<"Order", 'Int'>
-  readonly orderNumber: Prisma.FieldRef<"Order", 'Int'>
+  readonly orderNumber: Prisma.FieldRef<"Order", 'String'>
   readonly customerId: Prisma.FieldRef<"Order", 'Int'>
   readonly status: Prisma.FieldRef<"Order", 'OrderStatus'>
   readonly createdAt: Prisma.FieldRef<"Order", 'DateTime'>

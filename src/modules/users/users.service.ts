@@ -27,7 +27,7 @@ export const findById = async (id: number) => {
     where: { id, deletedAt: null },
     ...userArgs,
   });
-  if (!user) throw new NotFoundError(`User with ID:${id} not found`);
+  if (!user) throw new NotFoundError(`User with ID:${id} not found.`);
   return user;
 };
 

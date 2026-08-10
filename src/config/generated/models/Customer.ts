@@ -38,26 +38,47 @@ export type CustomerSumAggregateOutputType = {
 
 export type CustomerMinAggregateOutputType = {
   id: number | null
-  name: string | null
+  firstName: string | null
+  lastName: string | null
   email: string | null
   phone: string | null
+  gender: $Enums.Gender | null
+  birthDate: Date | null
   addressId: number | null
+  type: $Enums.CustomerType | null
+  status: $Enums.CustomerStatus | null
+  notes: string | null
+  company: string | null
 }
 
 export type CustomerMaxAggregateOutputType = {
   id: number | null
-  name: string | null
+  firstName: string | null
+  lastName: string | null
   email: string | null
   phone: string | null
+  gender: $Enums.Gender | null
+  birthDate: Date | null
   addressId: number | null
+  type: $Enums.CustomerType | null
+  status: $Enums.CustomerStatus | null
+  notes: string | null
+  company: string | null
 }
 
 export type CustomerCountAggregateOutputType = {
   id: number
-  name: number
+  firstName: number
+  lastName: number
   email: number
   phone: number
+  gender: number
+  birthDate: number
   addressId: number
+  type: number
+  status: number
+  notes: number
+  company: number
   _all: number
 }
 
@@ -74,26 +95,47 @@ export type CustomerSumAggregateInputType = {
 
 export type CustomerMinAggregateInputType = {
   id?: true
-  name?: true
+  firstName?: true
+  lastName?: true
   email?: true
   phone?: true
+  gender?: true
+  birthDate?: true
   addressId?: true
+  type?: true
+  status?: true
+  notes?: true
+  company?: true
 }
 
 export type CustomerMaxAggregateInputType = {
   id?: true
-  name?: true
+  firstName?: true
+  lastName?: true
   email?: true
   phone?: true
+  gender?: true
+  birthDate?: true
   addressId?: true
+  type?: true
+  status?: true
+  notes?: true
+  company?: true
 }
 
 export type CustomerCountAggregateInputType = {
   id?: true
-  name?: true
+  firstName?: true
+  lastName?: true
   email?: true
   phone?: true
+  gender?: true
+  birthDate?: true
   addressId?: true
+  type?: true
+  status?: true
+  notes?: true
+  company?: true
   _all?: true
 }
 
@@ -185,10 +227,17 @@ export type CustomerGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type CustomerGroupByOutputType = {
   id: number
-  name: string
+  firstName: string
+  lastName: string
   email: string
   phone: string
+  gender: $Enums.Gender | null
+  birthDate: Date | null
   addressId: number | null
+  type: $Enums.CustomerType
+  status: $Enums.CustomerStatus
+  notes: string | null
+  company: string | null
   _count: CustomerCountAggregateOutputType | null
   _avg: CustomerAvgAggregateOutputType | null
   _sum: CustomerSumAggregateOutputType | null
@@ -216,20 +265,34 @@ export type CustomerWhereInput = {
   OR?: Prisma.CustomerWhereInput[]
   NOT?: Prisma.CustomerWhereInput | Prisma.CustomerWhereInput[]
   id?: Prisma.IntFilter<"Customer"> | number
-  name?: Prisma.StringFilter<"Customer"> | string
+  firstName?: Prisma.StringFilter<"Customer"> | string
+  lastName?: Prisma.StringFilter<"Customer"> | string
   email?: Prisma.StringFilter<"Customer"> | string
   phone?: Prisma.StringFilter<"Customer"> | string
+  gender?: Prisma.EnumGenderNullableFilter<"Customer"> | $Enums.Gender | null
+  birthDate?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
   addressId?: Prisma.IntNullableFilter<"Customer"> | number | null
+  type?: Prisma.EnumCustomerTypeFilter<"Customer"> | $Enums.CustomerType
+  status?: Prisma.EnumCustomerStatusFilter<"Customer"> | $Enums.CustomerStatus
+  notes?: Prisma.StringNullableFilter<"Customer"> | string | null
+  company?: Prisma.StringNullableFilter<"Customer"> | string | null
   address?: Prisma.XOR<Prisma.AddressNullableScalarRelationFilter, Prisma.AddressWhereInput> | null
   orders?: Prisma.OrderListRelationFilter
 }
 
 export type CustomerOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  gender?: Prisma.SortOrderInput | Prisma.SortOrder
+  birthDate?: Prisma.SortOrderInput | Prisma.SortOrder
   addressId?: Prisma.SortOrderInput | Prisma.SortOrder
+  type?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  company?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.AddressOrderByWithRelationInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
 }
@@ -240,19 +303,33 @@ export type CustomerWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.CustomerWhereInput | Prisma.CustomerWhereInput[]
   OR?: Prisma.CustomerWhereInput[]
   NOT?: Prisma.CustomerWhereInput | Prisma.CustomerWhereInput[]
-  name?: Prisma.StringFilter<"Customer"> | string
+  firstName?: Prisma.StringFilter<"Customer"> | string
+  lastName?: Prisma.StringFilter<"Customer"> | string
   email?: Prisma.StringFilter<"Customer"> | string
   phone?: Prisma.StringFilter<"Customer"> | string
+  gender?: Prisma.EnumGenderNullableFilter<"Customer"> | $Enums.Gender | null
+  birthDate?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  type?: Prisma.EnumCustomerTypeFilter<"Customer"> | $Enums.CustomerType
+  status?: Prisma.EnumCustomerStatusFilter<"Customer"> | $Enums.CustomerStatus
+  notes?: Prisma.StringNullableFilter<"Customer"> | string | null
+  company?: Prisma.StringNullableFilter<"Customer"> | string | null
   address?: Prisma.XOR<Prisma.AddressNullableScalarRelationFilter, Prisma.AddressWhereInput> | null
   orders?: Prisma.OrderListRelationFilter
 }, "id" | "addressId">
 
 export type CustomerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  gender?: Prisma.SortOrderInput | Prisma.SortOrder
+  birthDate?: Prisma.SortOrderInput | Prisma.SortOrder
   addressId?: Prisma.SortOrderInput | Prisma.SortOrder
+  type?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  company?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CustomerCountOrderByAggregateInput
   _avg?: Prisma.CustomerAvgOrderByAggregateInput
   _max?: Prisma.CustomerMaxOrderByAggregateInput
@@ -265,74 +342,137 @@ export type CustomerScalarWhereWithAggregatesInput = {
   OR?: Prisma.CustomerScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CustomerScalarWhereWithAggregatesInput | Prisma.CustomerScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Customer"> | number
-  name?: Prisma.StringWithAggregatesFilter<"Customer"> | string
+  firstName?: Prisma.StringWithAggregatesFilter<"Customer"> | string
+  lastName?: Prisma.StringWithAggregatesFilter<"Customer"> | string
   email?: Prisma.StringWithAggregatesFilter<"Customer"> | string
   phone?: Prisma.StringWithAggregatesFilter<"Customer"> | string
+  gender?: Prisma.EnumGenderNullableWithAggregatesFilter<"Customer"> | $Enums.Gender | null
+  birthDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Customer"> | Date | string | null
   addressId?: Prisma.IntNullableWithAggregatesFilter<"Customer"> | number | null
+  type?: Prisma.EnumCustomerTypeWithAggregatesFilter<"Customer"> | $Enums.CustomerType
+  status?: Prisma.EnumCustomerStatusWithAggregatesFilter<"Customer"> | $Enums.CustomerStatus
+  notes?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
+  company?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
 }
 
 export type CustomerCreateInput = {
-  name: string
+  firstName: string
+  lastName: string
   email: string
   phone: string
+  gender?: $Enums.Gender | null
+  birthDate?: Date | string | null
+  type?: $Enums.CustomerType
+  status?: $Enums.CustomerStatus
+  notes?: string | null
+  company?: string | null
   address?: Prisma.AddressCreateNestedOneWithoutCustomerInput
   orders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateInput = {
   id?: number
-  name: string
+  firstName: string
+  lastName: string
   email: string
   phone: string
+  gender?: $Enums.Gender | null
+  birthDate?: Date | string | null
   addressId?: number | null
+  type?: $Enums.CustomerType
+  status?: $Enums.CustomerStatus
+  notes?: string | null
+  company?: string | null
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUpdateInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  type?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  status?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.AddressUpdateOneWithoutCustomerNestedInput
   orders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   addressId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  status?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateManyInput = {
   id?: number
-  name: string
+  firstName: string
+  lastName: string
   email: string
   phone: string
+  gender?: $Enums.Gender | null
+  birthDate?: Date | string | null
   addressId?: number | null
+  type?: $Enums.CustomerType
+  status?: $Enums.CustomerStatus
+  notes?: string | null
+  company?: string | null
 }
 
 export type CustomerUpdateManyMutationInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  type?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  status?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CustomerUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   addressId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  status?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CustomerCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  birthDate?: Prisma.SortOrder
   addressId?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  company?: Prisma.SortOrder
 }
 
 export type CustomerAvgOrderByAggregateInput = {
@@ -342,18 +482,32 @@ export type CustomerAvgOrderByAggregateInput = {
 
 export type CustomerMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  birthDate?: Prisma.SortOrder
   addressId?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  company?: Prisma.SortOrder
 }
 
 export type CustomerMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  birthDate?: Prisma.SortOrder
   addressId?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  company?: Prisma.SortOrder
 }
 
 export type CustomerSumOrderByAggregateInput = {
@@ -373,6 +527,26 @@ export type CustomerNullableScalarRelationFilter = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type NullableEnumGenderFieldUpdateOperationsInput = {
+  set?: $Enums.Gender | null
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type EnumCustomerTypeFieldUpdateOperationsInput = {
+  set?: $Enums.CustomerType
+}
+
+export type EnumCustomerStatusFieldUpdateOperationsInput = {
+  set?: $Enums.CustomerStatus
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -438,18 +612,32 @@ export type CustomerUncheckedUpdateOneWithoutAddressNestedInput = {
 }
 
 export type CustomerCreateWithoutOrdersInput = {
-  name: string
+  firstName: string
+  lastName: string
   email: string
   phone: string
+  gender?: $Enums.Gender | null
+  birthDate?: Date | string | null
+  type?: $Enums.CustomerType
+  status?: $Enums.CustomerStatus
+  notes?: string | null
+  company?: string | null
   address?: Prisma.AddressCreateNestedOneWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutOrdersInput = {
   id?: number
-  name: string
+  firstName: string
+  lastName: string
   email: string
   phone: string
+  gender?: $Enums.Gender | null
+  birthDate?: Date | string | null
   addressId?: number | null
+  type?: $Enums.CustomerType
+  status?: $Enums.CustomerStatus
+  notes?: string | null
+  company?: string | null
 }
 
 export type CustomerCreateOrConnectWithoutOrdersInput = {
@@ -469,32 +657,60 @@ export type CustomerUpdateToOneWithWhereWithoutOrdersInput = {
 }
 
 export type CustomerUpdateWithoutOrdersInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  type?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  status?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.AddressUpdateOneWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutOrdersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   addressId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  status?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CustomerCreateWithoutAddressInput = {
-  name: string
+  firstName: string
+  lastName: string
   email: string
   phone: string
+  gender?: $Enums.Gender | null
+  birthDate?: Date | string | null
+  type?: $Enums.CustomerType
+  status?: $Enums.CustomerStatus
+  notes?: string | null
+  company?: string | null
   orders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutAddressInput = {
   id?: number
-  name: string
+  firstName: string
+  lastName: string
   email: string
   phone: string
+  gender?: $Enums.Gender | null
+  birthDate?: Date | string | null
+  type?: $Enums.CustomerType
+  status?: $Enums.CustomerStatus
+  notes?: string | null
+  company?: string | null
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
@@ -515,17 +731,31 @@ export type CustomerUpdateToOneWithWhereWithoutAddressInput = {
 }
 
 export type CustomerUpdateWithoutAddressInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  type?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  status?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutAddressInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  type?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  status?: Prisma.EnumCustomerStatusFieldUpdateOperationsInput | $Enums.CustomerStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
@@ -562,10 +792,17 @@ export type CustomerCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types
 
 export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
+  firstName?: boolean
+  lastName?: boolean
   email?: boolean
   phone?: boolean
+  gender?: boolean
+  birthDate?: boolean
   addressId?: boolean
+  type?: boolean
+  status?: boolean
+  notes?: boolean
+  company?: boolean
   address?: boolean | Prisma.Customer$addressArgs<ExtArgs>
   orders?: boolean | Prisma.Customer$ordersArgs<ExtArgs>
   _count?: boolean | Prisma.CustomerCountOutputTypeDefaultArgs<ExtArgs>
@@ -573,31 +810,52 @@ export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 
 export type CustomerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
+  firstName?: boolean
+  lastName?: boolean
   email?: boolean
   phone?: boolean
+  gender?: boolean
+  birthDate?: boolean
   addressId?: boolean
+  type?: boolean
+  status?: boolean
+  notes?: boolean
+  company?: boolean
   address?: boolean | Prisma.Customer$addressArgs<ExtArgs>
 }, ExtArgs["result"]["customer"]>
 
 export type CustomerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
+  firstName?: boolean
+  lastName?: boolean
   email?: boolean
   phone?: boolean
+  gender?: boolean
+  birthDate?: boolean
   addressId?: boolean
+  type?: boolean
+  status?: boolean
+  notes?: boolean
+  company?: boolean
   address?: boolean | Prisma.Customer$addressArgs<ExtArgs>
 }, ExtArgs["result"]["customer"]>
 
 export type CustomerSelectScalar = {
   id?: boolean
-  name?: boolean
+  firstName?: boolean
+  lastName?: boolean
   email?: boolean
   phone?: boolean
+  gender?: boolean
+  birthDate?: boolean
   addressId?: boolean
+  type?: boolean
+  status?: boolean
+  notes?: boolean
+  company?: boolean
 }
 
-export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "addressId", ExtArgs["result"]["customer"]>
+export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "phone" | "gender" | "birthDate" | "addressId" | "type" | "status" | "notes" | "company", ExtArgs["result"]["customer"]>
 export type CustomerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   address?: boolean | Prisma.Customer$addressArgs<ExtArgs>
   orders?: boolean | Prisma.Customer$ordersArgs<ExtArgs>
@@ -618,10 +876,17 @@ export type $CustomerPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    name: string
+    firstName: string
+    lastName: string
     email: string
     phone: string
+    gender: $Enums.Gender | null
+    birthDate: Date | null
     addressId: number | null
+    type: $Enums.CustomerType
+    status: $Enums.CustomerStatus
+    notes: string | null
+    company: string | null
   }, ExtArgs["result"]["customer"]>
   composites: {}
 }
@@ -1048,10 +1313,17 @@ export interface Prisma__CustomerClient<T, Null = never, ExtArgs extends runtime
  */
 export interface CustomerFieldRefs {
   readonly id: Prisma.FieldRef<"Customer", 'Int'>
-  readonly name: Prisma.FieldRef<"Customer", 'String'>
+  readonly firstName: Prisma.FieldRef<"Customer", 'String'>
+  readonly lastName: Prisma.FieldRef<"Customer", 'String'>
   readonly email: Prisma.FieldRef<"Customer", 'String'>
   readonly phone: Prisma.FieldRef<"Customer", 'String'>
+  readonly gender: Prisma.FieldRef<"Customer", 'Gender'>
+  readonly birthDate: Prisma.FieldRef<"Customer", 'DateTime'>
   readonly addressId: Prisma.FieldRef<"Customer", 'Int'>
+  readonly type: Prisma.FieldRef<"Customer", 'CustomerType'>
+  readonly status: Prisma.FieldRef<"Customer", 'CustomerStatus'>
+  readonly notes: Prisma.FieldRef<"Customer", 'String'>
+  readonly company: Prisma.FieldRef<"Customer", 'String'>
 }
     
 

@@ -1,4 +1,4 @@
-import { TStockLevels } from "@/types";
+import { EStockLevels } from "@/types";
 import { TProductFilters } from "./products.validation";
 import { Prisma } from "@/config/generated/client";
 
@@ -7,10 +7,10 @@ export const buildProductWhereClause = (
 ): Prisma.ProductWhereInput => {
   const { name, brand, categoryId, stock } = filters;
   const stockFilter = () => {
-    if (stock === TStockLevels.IN_STOCK) return { gt: 50 };
-    if (stock === TStockLevels.LOW_STOCK) return { gte: 10, lte: 50 };
-    if (stock === TStockLevels.ALMOST_SOLD_OUT) return { lte: 10, gt: 0 };
-    if (stock === TStockLevels.OUT_OF_STOCK) return 0;
+    if (stock === EStockLevels.IN_STOCK) return { gt: 50 };
+    if (stock === EStockLevels.LOW_STOCK) return { gte: 10, lte: 50 };
+    if (stock === EStockLevels.ALMOST_SOLD_OUT) return { lte: 10, gt: 0 };
+    if (stock === EStockLevels.OUT_OF_STOCK) return 0;
     return undefined;
   };
   return {
