@@ -1,12 +1,17 @@
 import prisma from "@/config/database";
 import {
   productInclude,
+  TCreateProductPayload,
   TProductFilters,
   TUpdateProductPayload,
 } from "./products.validation";
 import {
   buildProductOrderByClause,
   buildProductWhereClause,
+  generateBarcode,
+  generateQRCode,
+  generateSku,
+  toThumbnail,
 } from "./products.utils";
 import { NotFoundError } from "@/errors";
 
@@ -26,6 +31,26 @@ export const findById = async (id: number) => {
   });
   if (!product) throw new NotFoundError(`Product with ID:${id} not found.`);
   return product;
+};
+
+export const create = async (payload: TCreateProductPayload) => {
+  const barCode = generateBarcode();
+  const sku = generateSku();
+  const qrCode = await generateQRCode(sku);
+  return await prisma.product.create({
+    data: {
+      ...payload,
+      barCode,
+      sku,
+      qrCode,
+      thumbnail: toThumbnail(payload.images[0]),
+      warrantyInformation: payload.warrantyInformation ?? "",
+      shippingInformation: payload.shippingInformation ?? "",
+      returnPolicy: payload.returnPolicy ?? "",
+      discountPercentage: payload.discountPercentage ?? 0,
+      rating: 0,
+    },
+  });
 };
 
 export const update = async (id: number, payload: TUpdateProductPayload) =>

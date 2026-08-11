@@ -8,6 +8,7 @@ import {
 } from "./users.validation";
 import { requireRoles } from "@/middleware/authorizaton";
 import { Role } from "@/config/generated/enums";
+import upload from "@/config/multer";
 
 const usersRouter = Router();
 
@@ -29,6 +30,11 @@ usersRouter.post(
   requireRoles([Role.ADMIN]),
   validatePayload(createUserSchema),
   usersController.createUser,
+);
+usersRouter.post(
+  "/:id/profile-image",
+  upload.single("avatar"),
+  usersController.changeUserProfileImage,
 );
 
 //UPDATE METHODS

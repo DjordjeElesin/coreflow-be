@@ -1,6 +1,11 @@
 import prisma from "@/config/database";
 import { Prisma } from "@/config/generated/client";
-import { BadRequestError, ForbiddenError, NotFoundError } from "@/errors";
+import {
+  BadRequestError,
+  ForbiddenError,
+  NotFoundError,
+  UnauthorizedError,
+} from "@/errors";
 import {
   TChangePasswordPayload,
   TCreateUserPayload,
@@ -13,6 +18,8 @@ import { assertEditableFieldsAccess } from "@/utils/assertEditableFieldsAccess";
 import { TAuthUser } from "@/types";
 import bcrypt from "bcrypt";
 import { ERROR_MSGS } from "@/constants";
+import { uploadToCloudinary } from "@/utils/uploadToCloudinary";
+
 
 const userArgs = {
   omit: { password: true, addressId: true, deletedAt: true, updatedAt: true },
@@ -91,4 +98,31 @@ export const changePassword = async (
     where: { id, deletedAt: null },
     data: { password: await bcrypt.hash(newPassword, 10) },
   });
+};
+
+export const changeProfileImage = async (
+  id: number,
+  currentUser: TAuthUser,
+  fileBuffer?: Buffer,
+) => {
+  const user = await prisma.user.findFirst({ where: { id } });
+
+  if (!user) throw new NotFoundError(`User with ID:${id} not found.`);
+  if (currentUser.id !== user.id)
+    throw new UnauthorizedError(ERROR_MSGS.no_permission_action);
+
+  if (!fileBuffer) throw new BadRequestError("No file provided");
+  const uploaded = await uploadToCloudinary(fileBuffer, {
+    folder: "coreflow/avatars",
+    transformation: [
+      { width: 630, height: 630, crop: "fill", gravity: "face" },
+    ],
+  });
+
+  const updated = await prisma.user.update({
+    where: { id },
+    data: { profileImage: uploaded.secure_url },
+  });
+
+  return updated;
 };

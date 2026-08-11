@@ -1,0 +1,1 @@
+export { uploadToCloudinary } from "./uploadToCloudinary";

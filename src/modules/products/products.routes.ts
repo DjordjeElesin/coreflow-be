@@ -1,7 +1,10 @@
 import { Router } from "express";
 import * as productsController from "./products.controller";
 import { validatePayload } from "@/middleware/validate";
-import { updateProductSchema } from "./products.validation";
+import {
+  createProductSchema,
+  updateProductSchema,
+} from "./products.validation";
 import { requireRoles } from "@/middleware/authorizaton";
 import { Role } from "@/config/generated/enums";
 
@@ -10,6 +13,14 @@ const productsRouter = Router();
 //GET METHODS
 productsRouter.get("/", productsController.getProducts);
 productsRouter.get("/:id", productsController.getProductById);
+
+//POST METHODS
+productsRouter.post(
+  "/",
+  requireRoles([Role.ADMIN]),
+  validatePayload(createProductSchema),
+  productsController.createProduct,
+);
 
 //PATCH METHODS
 productsRouter.patch(

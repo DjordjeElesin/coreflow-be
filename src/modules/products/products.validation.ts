@@ -11,6 +11,20 @@ export type TProductFilters = {
   sortOrder: ESortOrder;
 };
 
+export type TCreateProductPayload = {
+  name: string;
+  description: string;
+  price: number;
+  discountPercentage?: number;
+  stock: number;
+  brand: string;
+  categoryId: number;
+  images: string[];
+  warrantyInformation?: string;
+  shippingInformation?: string;
+  returnPolicy?: string;
+};
+
 export type TUpdateProductPayload = Prisma.ProductUncheckedUpdateInput;
 
 export const productInclude = {
@@ -32,6 +46,20 @@ export const productFiltersSchema = Joi.object<TProductFilters>({
     .valid(...Object.values(ESortOrder))
     .optional()
     .default("asc"),
+});
+
+export const createProductSchema = Joi.object<TCreateProductPayload>({
+  name: Joi.string().trim().min(2).max(200).required(),
+  description: Joi.string().trim().max(2000).required(),
+  price: Joi.number().min(0).required(),
+  discountPercentage: Joi.number().min(0).max(100).default(0),
+  stock: Joi.number().integer().min(0).default(0),
+  brand: Joi.string().trim().max(120).default("Unknown"),
+  categoryId: Joi.number().integer().positive().required(),
+  images: Joi.array().items(Joi.string().uri()).max(8).default([]),
+  warrantyInformation: Joi.string().trim().allow("").default(""),
+  shippingInformation: Joi.string().trim().allow("").default(""),
+  returnPolicy: Joi.string().trim().allow("").default(""),
 });
 
 export const updateProductSchema = Joi.object<TUpdateProductPayload>({

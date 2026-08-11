@@ -18,6 +18,7 @@ const env = {
   JWT_REFRESH_SECRET: getEnv("JWT_REFRESH_SECRET"),
   JWT_ACCESS_EXPIRES_IN: getEnv("JWT_ACCESS_EXPIRES_IN", "1h"),
   JWT_REFRESH_EXPIRES_IN: getEnv("JWT_REFRESH_EXPIRES_IN", "7d"),
+  APP_URL: getEnv("APP_URL"),
 };
 
 export default env;

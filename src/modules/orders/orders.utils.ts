@@ -1,8 +1,7 @@
 import { Prisma } from "@/config/generated/client";
 import { TCreateOrderItemPayload, TOrderFilters } from "./orders.validation";
 import { customAlphabet } from "nanoid";
-import prisma from "@/config/database";
-import { NotFoundError } from "@/errors";
+
 
 export const buildOrdersWhereClause = (
   filters: TOrderFilters,

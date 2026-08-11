@@ -56,3 +56,16 @@ export const changeUserPassword = async (req: Request, res: Response) => {
     message: "Password changed successfully.",
   });
 };
+
+export const changeUserProfileImage = async (req: Request, res: Response) => {
+  const id = validateIdParam(req.params.id);
+  const currentUser = getCurrentUser(req);
+
+  const user = await usersService.changeProfileImage(
+    id,
+    currentUser,
+    req.file?.buffer,
+  );
+
+  sendResponse({ res, statusCode: HttpStatusCode.OK, data: user });
+};
