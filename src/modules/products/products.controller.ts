@@ -19,6 +19,10 @@ export const getProductById = async (req: Request, res: Response) => {
   sendResponse({ res, statusCode: HttpStatusCode.OK, data: product });
 };
 
+export const createProduct = async (req: Request, res: Response) => {
+  
+}
+
 export const updateProduct = async (req: Request, res: Response) => {
   const id = validateIdParam(req.params.id);
   const updated = await productsService.update(id, req.body);
