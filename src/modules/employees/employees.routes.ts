@@ -42,6 +42,11 @@ employeesRouter.patch(
   validatePayload(updateLeaveRequestSchema),
   employeesController.updateLeaveRequest,
 );
+employeesRouter.patch(
+  "/leave-request/:id/approve",
+  requireRoles([Role.ADMIN, Role.MODERATOR]),
+  employeesController.updateLeaveRequest,
+);
 
 //DELETE METHODS
 employeesRouter.delete("/:id", employeesController.deleteEmployee);

@@ -20,7 +20,6 @@ import bcrypt from "bcrypt";
 import { ERROR_MSGS } from "@/constants";
 import { uploadToCloudinary } from "@/utils/uploadToCloudinary";
 
-
 const userArgs = {
   omit: { password: true, addressId: true, deletedAt: true, updatedAt: true },
   include: { address: true },

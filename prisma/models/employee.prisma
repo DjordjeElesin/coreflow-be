@@ -24,8 +24,12 @@ model LeaveRequest {
     leaveType  LeaveRequestType
     status     LeaveRequestStatus
     reason     String?
+    createdAt  DateTime           @default(now())
     employee   Employee           @relation(fields: [employeeId], references: [id])
     employeeId Int
+    reviewedBy Int?
+    reviewer   User?              @relation(fields: [reviewedBy], references: [id])
+    reviewedAt DateTime?
 
     @@map("leave_requests")
 }

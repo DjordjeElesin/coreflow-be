@@ -4,6 +4,7 @@ import { Prisma } from "@/config/generated/client";
 import omit from "lodash/omit";
 
 export type TUserFilters = {
+  name?: string
   email?: string;
   role?: Role;
   gender?: Gender;
@@ -43,6 +44,7 @@ export type TChangePasswordPayload = {
 };
 
 export const userFiltersSchema = Joi.object<TUserFilters>({
+  name: Joi.string().optional(),
   role: Joi.string()
     .valid(...Object.values(Role))
     .optional(),

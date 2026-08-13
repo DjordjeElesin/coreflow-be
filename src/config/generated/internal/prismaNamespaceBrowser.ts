@@ -93,7 +93,8 @@ export const CustomerScalarFieldEnum = {
   type: 'type',
   status: 'status',
   notes: 'notes',
-  company: 'company'
+  company: 'company',
+  createdAt: 'createdAt'
 } as const
 
 export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
@@ -124,7 +125,10 @@ export const LeaveRequestScalarFieldEnum = {
   leaveType: 'leaveType',
   status: 'status',
   reason: 'reason',
-  employeeId: 'employeeId'
+  createdAt: 'createdAt',
+  employeeId: 'employeeId',
+  reviewedBy: 'reviewedBy',
+  reviewedAt: 'reviewedAt'
 } as const
 
 export type LeaveRequestScalarFieldEnum = (typeof LeaveRequestScalarFieldEnum)[keyof typeof LeaveRequestScalarFieldEnum]

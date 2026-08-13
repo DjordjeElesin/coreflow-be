@@ -29,11 +29,13 @@ export type AggregateLeaveRequest = {
 export type LeaveRequestAvgAggregateOutputType = {
   id: number | null
   employeeId: number | null
+  reviewedBy: number | null
 }
 
 export type LeaveRequestSumAggregateOutputType = {
   id: number | null
   employeeId: number | null
+  reviewedBy: number | null
 }
 
 export type LeaveRequestMinAggregateOutputType = {
@@ -43,7 +45,10 @@ export type LeaveRequestMinAggregateOutputType = {
   leaveType: $Enums.LeaveRequestType | null
   status: $Enums.LeaveRequestStatus | null
   reason: string | null
+  createdAt: Date | null
   employeeId: number | null
+  reviewedBy: number | null
+  reviewedAt: Date | null
 }
 
 export type LeaveRequestMaxAggregateOutputType = {
@@ -53,7 +58,10 @@ export type LeaveRequestMaxAggregateOutputType = {
   leaveType: $Enums.LeaveRequestType | null
   status: $Enums.LeaveRequestStatus | null
   reason: string | null
+  createdAt: Date | null
   employeeId: number | null
+  reviewedBy: number | null
+  reviewedAt: Date | null
 }
 
 export type LeaveRequestCountAggregateOutputType = {
@@ -63,7 +71,10 @@ export type LeaveRequestCountAggregateOutputType = {
   leaveType: number
   status: number
   reason: number
+  createdAt: number
   employeeId: number
+  reviewedBy: number
+  reviewedAt: number
   _all: number
 }
 
@@ -71,11 +82,13 @@ export type LeaveRequestCountAggregateOutputType = {
 export type LeaveRequestAvgAggregateInputType = {
   id?: true
   employeeId?: true
+  reviewedBy?: true
 }
 
 export type LeaveRequestSumAggregateInputType = {
   id?: true
   employeeId?: true
+  reviewedBy?: true
 }
 
 export type LeaveRequestMinAggregateInputType = {
@@ -85,7 +98,10 @@ export type LeaveRequestMinAggregateInputType = {
   leaveType?: true
   status?: true
   reason?: true
+  createdAt?: true
   employeeId?: true
+  reviewedBy?: true
+  reviewedAt?: true
 }
 
 export type LeaveRequestMaxAggregateInputType = {
@@ -95,7 +111,10 @@ export type LeaveRequestMaxAggregateInputType = {
   leaveType?: true
   status?: true
   reason?: true
+  createdAt?: true
   employeeId?: true
+  reviewedBy?: true
+  reviewedAt?: true
 }
 
 export type LeaveRequestCountAggregateInputType = {
@@ -105,7 +124,10 @@ export type LeaveRequestCountAggregateInputType = {
   leaveType?: true
   status?: true
   reason?: true
+  createdAt?: true
   employeeId?: true
+  reviewedBy?: true
+  reviewedAt?: true
   _all?: true
 }
 
@@ -202,7 +224,10 @@ export type LeaveRequestGroupByOutputType = {
   leaveType: $Enums.LeaveRequestType
   status: $Enums.LeaveRequestStatus
   reason: string | null
+  createdAt: Date
   employeeId: number
+  reviewedBy: number | null
+  reviewedAt: Date | null
   _count: LeaveRequestCountAggregateOutputType | null
   _avg: LeaveRequestAvgAggregateOutputType | null
   _sum: LeaveRequestSumAggregateOutputType | null
@@ -235,8 +260,12 @@ export type LeaveRequestWhereInput = {
   leaveType?: Prisma.EnumLeaveRequestTypeFilter<"LeaveRequest"> | $Enums.LeaveRequestType
   status?: Prisma.EnumLeaveRequestStatusFilter<"LeaveRequest"> | $Enums.LeaveRequestStatus
   reason?: Prisma.StringNullableFilter<"LeaveRequest"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"LeaveRequest"> | Date | string
   employeeId?: Prisma.IntFilter<"LeaveRequest"> | number
+  reviewedBy?: Prisma.IntNullableFilter<"LeaveRequest"> | number | null
+  reviewedAt?: Prisma.DateTimeNullableFilter<"LeaveRequest"> | Date | string | null
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
+  reviewer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type LeaveRequestOrderByWithRelationInput = {
@@ -246,8 +275,12 @@ export type LeaveRequestOrderByWithRelationInput = {
   leaveType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   reason?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
+  reviewedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   employee?: Prisma.EmployeeOrderByWithRelationInput
+  reviewer?: Prisma.UserOrderByWithRelationInput
 }
 
 export type LeaveRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -260,8 +293,12 @@ export type LeaveRequestWhereUniqueInput = Prisma.AtLeast<{
   leaveType?: Prisma.EnumLeaveRequestTypeFilter<"LeaveRequest"> | $Enums.LeaveRequestType
   status?: Prisma.EnumLeaveRequestStatusFilter<"LeaveRequest"> | $Enums.LeaveRequestStatus
   reason?: Prisma.StringNullableFilter<"LeaveRequest"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"LeaveRequest"> | Date | string
   employeeId?: Prisma.IntFilter<"LeaveRequest"> | number
+  reviewedBy?: Prisma.IntNullableFilter<"LeaveRequest"> | number | null
+  reviewedAt?: Prisma.DateTimeNullableFilter<"LeaveRequest"> | Date | string | null
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
+  reviewer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type LeaveRequestOrderByWithAggregationInput = {
@@ -271,7 +308,10 @@ export type LeaveRequestOrderByWithAggregationInput = {
   leaveType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   reason?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
+  reviewedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeaveRequestCountOrderByAggregateInput
   _avg?: Prisma.LeaveRequestAvgOrderByAggregateInput
   _max?: Prisma.LeaveRequestMaxOrderByAggregateInput
@@ -289,7 +329,10 @@ export type LeaveRequestScalarWhereWithAggregatesInput = {
   leaveType?: Prisma.EnumLeaveRequestTypeWithAggregatesFilter<"LeaveRequest"> | $Enums.LeaveRequestType
   status?: Prisma.EnumLeaveRequestStatusWithAggregatesFilter<"LeaveRequest"> | $Enums.LeaveRequestStatus
   reason?: Prisma.StringNullableWithAggregatesFilter<"LeaveRequest"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"LeaveRequest"> | Date | string
   employeeId?: Prisma.IntWithAggregatesFilter<"LeaveRequest"> | number
+  reviewedBy?: Prisma.IntNullableWithAggregatesFilter<"LeaveRequest"> | number | null
+  reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"LeaveRequest"> | Date | string | null
 }
 
 export type LeaveRequestCreateInput = {
@@ -298,7 +341,10 @@ export type LeaveRequestCreateInput = {
   leaveType: $Enums.LeaveRequestType
   status: $Enums.LeaveRequestStatus
   reason?: string | null
+  createdAt?: Date | string
+  reviewedAt?: Date | string | null
   employee: Prisma.EmployeeCreateNestedOneWithoutLeaveRequestsInput
+  reviewer?: Prisma.UserCreateNestedOneWithoutReviewedLeaveRequestsInput
 }
 
 export type LeaveRequestUncheckedCreateInput = {
@@ -308,7 +354,10 @@ export type LeaveRequestUncheckedCreateInput = {
   leaveType: $Enums.LeaveRequestType
   status: $Enums.LeaveRequestStatus
   reason?: string | null
+  createdAt?: Date | string
   employeeId: number
+  reviewedBy?: number | null
+  reviewedAt?: Date | string | null
 }
 
 export type LeaveRequestUpdateInput = {
@@ -317,7 +366,10 @@ export type LeaveRequestUpdateInput = {
   leaveType?: Prisma.EnumLeaveRequestTypeFieldUpdateOperationsInput | $Enums.LeaveRequestType
   status?: Prisma.EnumLeaveRequestStatusFieldUpdateOperationsInput | $Enums.LeaveRequestStatus
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutLeaveRequestsNestedInput
+  reviewer?: Prisma.UserUpdateOneWithoutReviewedLeaveRequestsNestedInput
 }
 
 export type LeaveRequestUncheckedUpdateInput = {
@@ -327,7 +379,10 @@ export type LeaveRequestUncheckedUpdateInput = {
   leaveType?: Prisma.EnumLeaveRequestTypeFieldUpdateOperationsInput | $Enums.LeaveRequestType
   status?: Prisma.EnumLeaveRequestStatusFieldUpdateOperationsInput | $Enums.LeaveRequestStatus
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employeeId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeaveRequestCreateManyInput = {
@@ -337,7 +392,10 @@ export type LeaveRequestCreateManyInput = {
   leaveType: $Enums.LeaveRequestType
   status: $Enums.LeaveRequestStatus
   reason?: string | null
+  createdAt?: Date | string
   employeeId: number
+  reviewedBy?: number | null
+  reviewedAt?: Date | string | null
 }
 
 export type LeaveRequestUpdateManyMutationInput = {
@@ -346,6 +404,8 @@ export type LeaveRequestUpdateManyMutationInput = {
   leaveType?: Prisma.EnumLeaveRequestTypeFieldUpdateOperationsInput | $Enums.LeaveRequestType
   status?: Prisma.EnumLeaveRequestStatusFieldUpdateOperationsInput | $Enums.LeaveRequestStatus
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeaveRequestUncheckedUpdateManyInput = {
@@ -355,7 +415,10 @@ export type LeaveRequestUncheckedUpdateManyInput = {
   leaveType?: Prisma.EnumLeaveRequestTypeFieldUpdateOperationsInput | $Enums.LeaveRequestType
   status?: Prisma.EnumLeaveRequestStatusFieldUpdateOperationsInput | $Enums.LeaveRequestStatus
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employeeId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeaveRequestCountOrderByAggregateInput = {
@@ -365,12 +428,16 @@ export type LeaveRequestCountOrderByAggregateInput = {
   leaveType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   reason?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
+  reviewedBy?: Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrder
 }
 
 export type LeaveRequestAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
+  reviewedBy?: Prisma.SortOrder
 }
 
 export type LeaveRequestMaxOrderByAggregateInput = {
@@ -380,7 +447,10 @@ export type LeaveRequestMaxOrderByAggregateInput = {
   leaveType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   reason?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
+  reviewedBy?: Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrder
 }
 
 export type LeaveRequestMinOrderByAggregateInput = {
@@ -390,12 +460,16 @@ export type LeaveRequestMinOrderByAggregateInput = {
   leaveType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   reason?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
+  reviewedBy?: Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrder
 }
 
 export type LeaveRequestSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
+  reviewedBy?: Prisma.SortOrder
 }
 
 export type LeaveRequestListRelationFilter = {
@@ -406,10 +480,6 @@ export type LeaveRequestListRelationFilter = {
 
 export type LeaveRequestOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
 }
 
 export type EnumLeaveRequestTypeFieldUpdateOperationsInput = {
@@ -462,12 +532,57 @@ export type LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput = {
   deleteMany?: Prisma.LeaveRequestScalarWhereInput | Prisma.LeaveRequestScalarWhereInput[]
 }
 
+export type LeaveRequestCreateNestedManyWithoutReviewerInput = {
+  create?: Prisma.XOR<Prisma.LeaveRequestCreateWithoutReviewerInput, Prisma.LeaveRequestUncheckedCreateWithoutReviewerInput> | Prisma.LeaveRequestCreateWithoutReviewerInput[] | Prisma.LeaveRequestUncheckedCreateWithoutReviewerInput[]
+  connectOrCreate?: Prisma.LeaveRequestCreateOrConnectWithoutReviewerInput | Prisma.LeaveRequestCreateOrConnectWithoutReviewerInput[]
+  createMany?: Prisma.LeaveRequestCreateManyReviewerInputEnvelope
+  connect?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
+}
+
+export type LeaveRequestUncheckedCreateNestedManyWithoutReviewerInput = {
+  create?: Prisma.XOR<Prisma.LeaveRequestCreateWithoutReviewerInput, Prisma.LeaveRequestUncheckedCreateWithoutReviewerInput> | Prisma.LeaveRequestCreateWithoutReviewerInput[] | Prisma.LeaveRequestUncheckedCreateWithoutReviewerInput[]
+  connectOrCreate?: Prisma.LeaveRequestCreateOrConnectWithoutReviewerInput | Prisma.LeaveRequestCreateOrConnectWithoutReviewerInput[]
+  createMany?: Prisma.LeaveRequestCreateManyReviewerInputEnvelope
+  connect?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
+}
+
+export type LeaveRequestUpdateManyWithoutReviewerNestedInput = {
+  create?: Prisma.XOR<Prisma.LeaveRequestCreateWithoutReviewerInput, Prisma.LeaveRequestUncheckedCreateWithoutReviewerInput> | Prisma.LeaveRequestCreateWithoutReviewerInput[] | Prisma.LeaveRequestUncheckedCreateWithoutReviewerInput[]
+  connectOrCreate?: Prisma.LeaveRequestCreateOrConnectWithoutReviewerInput | Prisma.LeaveRequestCreateOrConnectWithoutReviewerInput[]
+  upsert?: Prisma.LeaveRequestUpsertWithWhereUniqueWithoutReviewerInput | Prisma.LeaveRequestUpsertWithWhereUniqueWithoutReviewerInput[]
+  createMany?: Prisma.LeaveRequestCreateManyReviewerInputEnvelope
+  set?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
+  disconnect?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
+  delete?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
+  connect?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
+  update?: Prisma.LeaveRequestUpdateWithWhereUniqueWithoutReviewerInput | Prisma.LeaveRequestUpdateWithWhereUniqueWithoutReviewerInput[]
+  updateMany?: Prisma.LeaveRequestUpdateManyWithWhereWithoutReviewerInput | Prisma.LeaveRequestUpdateManyWithWhereWithoutReviewerInput[]
+  deleteMany?: Prisma.LeaveRequestScalarWhereInput | Prisma.LeaveRequestScalarWhereInput[]
+}
+
+export type LeaveRequestUncheckedUpdateManyWithoutReviewerNestedInput = {
+  create?: Prisma.XOR<Prisma.LeaveRequestCreateWithoutReviewerInput, Prisma.LeaveRequestUncheckedCreateWithoutReviewerInput> | Prisma.LeaveRequestCreateWithoutReviewerInput[] | Prisma.LeaveRequestUncheckedCreateWithoutReviewerInput[]
+  connectOrCreate?: Prisma.LeaveRequestCreateOrConnectWithoutReviewerInput | Prisma.LeaveRequestCreateOrConnectWithoutReviewerInput[]
+  upsert?: Prisma.LeaveRequestUpsertWithWhereUniqueWithoutReviewerInput | Prisma.LeaveRequestUpsertWithWhereUniqueWithoutReviewerInput[]
+  createMany?: Prisma.LeaveRequestCreateManyReviewerInputEnvelope
+  set?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
+  disconnect?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
+  delete?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
+  connect?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
+  update?: Prisma.LeaveRequestUpdateWithWhereUniqueWithoutReviewerInput | Prisma.LeaveRequestUpdateWithWhereUniqueWithoutReviewerInput[]
+  updateMany?: Prisma.LeaveRequestUpdateManyWithWhereWithoutReviewerInput | Prisma.LeaveRequestUpdateManyWithWhereWithoutReviewerInput[]
+  deleteMany?: Prisma.LeaveRequestScalarWhereInput | Prisma.LeaveRequestScalarWhereInput[]
+}
+
 export type LeaveRequestCreateWithoutEmployeeInput = {
   startDate: Date | string
   endDate: Date | string
   leaveType: $Enums.LeaveRequestType
   status: $Enums.LeaveRequestStatus
   reason?: string | null
+  createdAt?: Date | string
+  reviewedAt?: Date | string | null
+  reviewer?: Prisma.UserCreateNestedOneWithoutReviewedLeaveRequestsInput
 }
 
 export type LeaveRequestUncheckedCreateWithoutEmployeeInput = {
@@ -477,6 +592,9 @@ export type LeaveRequestUncheckedCreateWithoutEmployeeInput = {
   leaveType: $Enums.LeaveRequestType
   status: $Enums.LeaveRequestStatus
   reason?: string | null
+  createdAt?: Date | string
+  reviewedBy?: number | null
+  reviewedAt?: Date | string | null
 }
 
 export type LeaveRequestCreateOrConnectWithoutEmployeeInput = {
@@ -515,7 +633,59 @@ export type LeaveRequestScalarWhereInput = {
   leaveType?: Prisma.EnumLeaveRequestTypeFilter<"LeaveRequest"> | $Enums.LeaveRequestType
   status?: Prisma.EnumLeaveRequestStatusFilter<"LeaveRequest"> | $Enums.LeaveRequestStatus
   reason?: Prisma.StringNullableFilter<"LeaveRequest"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"LeaveRequest"> | Date | string
   employeeId?: Prisma.IntFilter<"LeaveRequest"> | number
+  reviewedBy?: Prisma.IntNullableFilter<"LeaveRequest"> | number | null
+  reviewedAt?: Prisma.DateTimeNullableFilter<"LeaveRequest"> | Date | string | null
+}
+
+export type LeaveRequestCreateWithoutReviewerInput = {
+  startDate: Date | string
+  endDate: Date | string
+  leaveType: $Enums.LeaveRequestType
+  status: $Enums.LeaveRequestStatus
+  reason?: string | null
+  createdAt?: Date | string
+  reviewedAt?: Date | string | null
+  employee: Prisma.EmployeeCreateNestedOneWithoutLeaveRequestsInput
+}
+
+export type LeaveRequestUncheckedCreateWithoutReviewerInput = {
+  id?: number
+  startDate: Date | string
+  endDate: Date | string
+  leaveType: $Enums.LeaveRequestType
+  status: $Enums.LeaveRequestStatus
+  reason?: string | null
+  createdAt?: Date | string
+  employeeId: number
+  reviewedAt?: Date | string | null
+}
+
+export type LeaveRequestCreateOrConnectWithoutReviewerInput = {
+  where: Prisma.LeaveRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeaveRequestCreateWithoutReviewerInput, Prisma.LeaveRequestUncheckedCreateWithoutReviewerInput>
+}
+
+export type LeaveRequestCreateManyReviewerInputEnvelope = {
+  data: Prisma.LeaveRequestCreateManyReviewerInput | Prisma.LeaveRequestCreateManyReviewerInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeaveRequestUpsertWithWhereUniqueWithoutReviewerInput = {
+  where: Prisma.LeaveRequestWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeaveRequestUpdateWithoutReviewerInput, Prisma.LeaveRequestUncheckedUpdateWithoutReviewerInput>
+  create: Prisma.XOR<Prisma.LeaveRequestCreateWithoutReviewerInput, Prisma.LeaveRequestUncheckedCreateWithoutReviewerInput>
+}
+
+export type LeaveRequestUpdateWithWhereUniqueWithoutReviewerInput = {
+  where: Prisma.LeaveRequestWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeaveRequestUpdateWithoutReviewerInput, Prisma.LeaveRequestUncheckedUpdateWithoutReviewerInput>
+}
+
+export type LeaveRequestUpdateManyWithWhereWithoutReviewerInput = {
+  where: Prisma.LeaveRequestScalarWhereInput
+  data: Prisma.XOR<Prisma.LeaveRequestUpdateManyMutationInput, Prisma.LeaveRequestUncheckedUpdateManyWithoutReviewerInput>
 }
 
 export type LeaveRequestCreateManyEmployeeInput = {
@@ -525,6 +695,9 @@ export type LeaveRequestCreateManyEmployeeInput = {
   leaveType: $Enums.LeaveRequestType
   status: $Enums.LeaveRequestStatus
   reason?: string | null
+  createdAt?: Date | string
+  reviewedBy?: number | null
+  reviewedAt?: Date | string | null
 }
 
 export type LeaveRequestUpdateWithoutEmployeeInput = {
@@ -533,6 +706,9 @@ export type LeaveRequestUpdateWithoutEmployeeInput = {
   leaveType?: Prisma.EnumLeaveRequestTypeFieldUpdateOperationsInput | $Enums.LeaveRequestType
   status?: Prisma.EnumLeaveRequestStatusFieldUpdateOperationsInput | $Enums.LeaveRequestStatus
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewer?: Prisma.UserUpdateOneWithoutReviewedLeaveRequestsNestedInput
 }
 
 export type LeaveRequestUncheckedUpdateWithoutEmployeeInput = {
@@ -542,6 +718,9 @@ export type LeaveRequestUncheckedUpdateWithoutEmployeeInput = {
   leaveType?: Prisma.EnumLeaveRequestTypeFieldUpdateOperationsInput | $Enums.LeaveRequestType
   status?: Prisma.EnumLeaveRequestStatusFieldUpdateOperationsInput | $Enums.LeaveRequestStatus
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeaveRequestUncheckedUpdateManyWithoutEmployeeInput = {
@@ -551,6 +730,56 @@ export type LeaveRequestUncheckedUpdateManyWithoutEmployeeInput = {
   leaveType?: Prisma.EnumLeaveRequestTypeFieldUpdateOperationsInput | $Enums.LeaveRequestType
   status?: Prisma.EnumLeaveRequestStatusFieldUpdateOperationsInput | $Enums.LeaveRequestStatus
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type LeaveRequestCreateManyReviewerInput = {
+  id?: number
+  startDate: Date | string
+  endDate: Date | string
+  leaveType: $Enums.LeaveRequestType
+  status: $Enums.LeaveRequestStatus
+  reason?: string | null
+  createdAt?: Date | string
+  employeeId: number
+  reviewedAt?: Date | string | null
+}
+
+export type LeaveRequestUpdateWithoutReviewerInput = {
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  leaveType?: Prisma.EnumLeaveRequestTypeFieldUpdateOperationsInput | $Enums.LeaveRequestType
+  status?: Prisma.EnumLeaveRequestStatusFieldUpdateOperationsInput | $Enums.LeaveRequestStatus
+  reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  employee?: Prisma.EmployeeUpdateOneRequiredWithoutLeaveRequestsNestedInput
+}
+
+export type LeaveRequestUncheckedUpdateWithoutReviewerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  leaveType?: Prisma.EnumLeaveRequestTypeFieldUpdateOperationsInput | $Enums.LeaveRequestType
+  status?: Prisma.EnumLeaveRequestStatusFieldUpdateOperationsInput | $Enums.LeaveRequestStatus
+  reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type LeaveRequestUncheckedUpdateManyWithoutReviewerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  leaveType?: Prisma.EnumLeaveRequestTypeFieldUpdateOperationsInput | $Enums.LeaveRequestType
+  status?: Prisma.EnumLeaveRequestStatusFieldUpdateOperationsInput | $Enums.LeaveRequestStatus
+  reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -562,8 +791,12 @@ export type LeaveRequestSelect<ExtArgs extends runtime.Types.Extensions.Internal
   leaveType?: boolean
   status?: boolean
   reason?: boolean
+  createdAt?: boolean
   employeeId?: boolean
+  reviewedBy?: boolean
+  reviewedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  reviewer?: boolean | Prisma.LeaveRequest$reviewerArgs<ExtArgs>
 }, ExtArgs["result"]["leaveRequest"]>
 
 export type LeaveRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -573,8 +806,12 @@ export type LeaveRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   leaveType?: boolean
   status?: boolean
   reason?: boolean
+  createdAt?: boolean
   employeeId?: boolean
+  reviewedBy?: boolean
+  reviewedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  reviewer?: boolean | Prisma.LeaveRequest$reviewerArgs<ExtArgs>
 }, ExtArgs["result"]["leaveRequest"]>
 
 export type LeaveRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -584,8 +821,12 @@ export type LeaveRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   leaveType?: boolean
   status?: boolean
   reason?: boolean
+  createdAt?: boolean
   employeeId?: boolean
+  reviewedBy?: boolean
+  reviewedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  reviewer?: boolean | Prisma.LeaveRequest$reviewerArgs<ExtArgs>
 }, ExtArgs["result"]["leaveRequest"]>
 
 export type LeaveRequestSelectScalar = {
@@ -595,24 +836,31 @@ export type LeaveRequestSelectScalar = {
   leaveType?: boolean
   status?: boolean
   reason?: boolean
+  createdAt?: boolean
   employeeId?: boolean
+  reviewedBy?: boolean
+  reviewedAt?: boolean
 }
 
-export type LeaveRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "startDate" | "endDate" | "leaveType" | "status" | "reason" | "employeeId", ExtArgs["result"]["leaveRequest"]>
+export type LeaveRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "startDate" | "endDate" | "leaveType" | "status" | "reason" | "createdAt" | "employeeId" | "reviewedBy" | "reviewedAt", ExtArgs["result"]["leaveRequest"]>
 export type LeaveRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  reviewer?: boolean | Prisma.LeaveRequest$reviewerArgs<ExtArgs>
 }
 export type LeaveRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  reviewer?: boolean | Prisma.LeaveRequest$reviewerArgs<ExtArgs>
 }
 export type LeaveRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  reviewer?: boolean | Prisma.LeaveRequest$reviewerArgs<ExtArgs>
 }
 
 export type $LeaveRequestPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeaveRequest"
   objects: {
     employee: Prisma.$EmployeePayload<ExtArgs>
+    reviewer: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -621,7 +869,10 @@ export type $LeaveRequestPayload<ExtArgs extends runtime.Types.Extensions.Intern
     leaveType: $Enums.LeaveRequestType
     status: $Enums.LeaveRequestStatus
     reason: string | null
+    createdAt: Date
     employeeId: number
+    reviewedBy: number | null
+    reviewedAt: Date | null
   }, ExtArgs["result"]["leaveRequest"]>
   composites: {}
 }
@@ -1017,6 +1268,7 @@ readonly fields: LeaveRequestFieldRefs;
 export interface Prisma__LeaveRequestClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   employee<T extends Prisma.EmployeeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmployeeDefaultArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  reviewer<T extends Prisma.LeaveRequest$reviewerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeaveRequest$reviewerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1052,7 +1304,10 @@ export interface LeaveRequestFieldRefs {
   readonly leaveType: Prisma.FieldRef<"LeaveRequest", 'LeaveRequestType'>
   readonly status: Prisma.FieldRef<"LeaveRequest", 'LeaveRequestStatus'>
   readonly reason: Prisma.FieldRef<"LeaveRequest", 'String'>
+  readonly createdAt: Prisma.FieldRef<"LeaveRequest", 'DateTime'>
   readonly employeeId: Prisma.FieldRef<"LeaveRequest", 'Int'>
+  readonly reviewedBy: Prisma.FieldRef<"LeaveRequest", 'Int'>
+  readonly reviewedAt: Prisma.FieldRef<"LeaveRequest", 'DateTime'>
 }
     
 
@@ -1451,6 +1706,25 @@ export type LeaveRequestDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many LeaveRequests to delete.
    */
   limit?: number
+}
+
+/**
+ * LeaveRequest.reviewer
+ */
+export type LeaveRequest$reviewerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

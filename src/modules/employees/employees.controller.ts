@@ -89,6 +89,21 @@ export const updateLeaveRequest = async (req: Request, res: Response) => {
   sendResponse({ res, statusCode: HttpStatusCode.OK, data: updated });
 };
 
+export const approveLeaveRequest = async (req: Request, res: Response) => {
+  const leaveRequestId = validateIdParam(req.params.id);
+  const leaveRequest =
+    await employeesService.approveLeaveRequest(leaveRequestId);
+
+  sendResponse({ res, statusCode: HttpStatusCode.OK, data: leaveRequest });
+};
+export const rejectLeaveRequest = async (req: Request, res: Response) => {
+  const leaveRequestId = validateIdParam(req.params.id);
+  const leaveRequest =
+    await employeesService.rejectLeaveRequest(leaveRequestId);
+
+  sendResponse({ res, statusCode: HttpStatusCode.OK, data: leaveRequest });
+};
+
 export const deleteLeaveRequest = async (req: Request, res: Response) => {
   const leaveRequestId = validateIdParam(req.params.id);
   const currentUser = getCurrentUser(req);
