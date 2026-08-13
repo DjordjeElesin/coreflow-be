@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 export const buildUserWhereClause = (
   filters: TUserFilters,
 ): Prisma.UserWhereInput => {
-  const { email, role, gender, city, country, state, street } = filters;
+  const { name, email, role, gender, city, country, state, street } = filters;
 
   const hasAddressFilter = Boolean(city || country || state || street);
   const addressFilter: Prisma.AddressWhereInput = {
@@ -18,6 +18,14 @@ export const buildUserWhereClause = (
   };
 
   return {
+    ...(name
+      ? {
+          OR: [
+            { firstName: { contains: name, mode: "insensitive" } },
+            { lastName: { contains: name, mode: "insensitive" } },
+          ],
+        }
+      : {}),
     deletedAt: null,
     email: email ? { contains: email, mode: "insensitive" } : undefined,
     role,

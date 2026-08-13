@@ -99,6 +99,18 @@ export const updateLeaveRequest = async (
   });
 };
 
+export const approveLeaveRequest = async (id: number) =>
+  prisma.leaveRequest.update({
+    where: { id },
+    data: { status: LeaveRequestStatus.APPROVED },
+  });
+
+export const rejectLeaveRequest = async (id: number) =>
+  prisma.leaveRequest.update({
+    where: { id },
+    data: { status: LeaveRequestStatus.REJECTED },
+  });
+
 export const deleteLeaveRequest = async (
   id: number,
   currentUser: TAuthUser,

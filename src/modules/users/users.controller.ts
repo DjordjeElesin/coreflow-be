@@ -5,7 +5,6 @@ import {
   validateJoiSchema,
 } from "@/utils/validationUtils/validationUtils";
 import { userFiltersSchema } from "./users.validation";
-import { BadRequestError } from "@/errors";
 import { sendResponse } from "@/utils/sendResponse";
 import { HttpStatusCode } from "@/types";
 import { getCurrentUser } from "@/utils/getCurrentUser";

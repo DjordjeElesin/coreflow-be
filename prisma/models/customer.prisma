@@ -2,8 +2,8 @@ model Customer {
     id        Int            @id @default(autoincrement())
     firstName String
     lastName  String
-    email     String
-    phone     String
+    email     String         @unique
+    phone     String?
     gender    Gender?
     birthDate DateTime?      @db.Date
     addressId Int?           @unique
@@ -13,6 +13,7 @@ model Customer {
     notes     String?
     company   String?
     orders    Order[]
+    createdAt DateTime       @default(now())
 
     @@map("customers")
 }

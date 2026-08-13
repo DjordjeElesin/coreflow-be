@@ -1,23 +1,24 @@
 model User {
-    id           Int            @id @default(autoincrement())
-    firstName    String
-    lastName     String
-    email        String         @unique
-    username     String         @unique
-    password     String
-    phone        String?
-    profileImage String?
-    gender       Gender?
-    birthDate    DateTime?      @db.Date
-    education    String?
-    role         Role           @default(USER)
-    createdAt    DateTime       @default(now())
-    updatedAt    DateTime       @updatedAt
-    deletedAt    DateTime?
-    addressId    Int?           @unique
-    address      Address?       @relation(fields: [addressId], references: [id])
-    employee     Employee?
-    refreshToken RefreshToken[]
+    id                    Int            @id @default(autoincrement())
+    firstName             String
+    lastName              String
+    email                 String         @unique
+    username              String         @unique
+    password              String
+    phone                 String?
+    profileImage          String?
+    gender                Gender?
+    birthDate             DateTime?      @db.Date
+    education             String?
+    role                  Role           @default(USER)
+    createdAt             DateTime       @default(now())
+    updatedAt             DateTime       @updatedAt
+    deletedAt             DateTime?
+    addressId             Int?           @unique
+    address               Address?       @relation(fields: [addressId], references: [id])
+    employee              Employee?
+    refreshToken          RefreshToken[]
+    reviewedLeaveRequests LeaveRequest[]
 
     @@map("users")
 }

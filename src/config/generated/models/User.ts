@@ -311,6 +311,7 @@ export type UserWhereInput = {
   address?: Prisma.XOR<Prisma.AddressNullableScalarRelationFilter, Prisma.AddressWhereInput> | null
   employee?: Prisma.XOR<Prisma.EmployeeNullableScalarRelationFilter, Prisma.EmployeeWhereInput> | null
   refreshToken?: Prisma.RefreshTokenListRelationFilter
+  reviewedLeaveRequests?: Prisma.LeaveRequestListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -333,6 +334,7 @@ export type UserOrderByWithRelationInput = {
   address?: Prisma.AddressOrderByWithRelationInput
   employee?: Prisma.EmployeeOrderByWithRelationInput
   refreshToken?: Prisma.RefreshTokenOrderByRelationAggregateInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -358,6 +360,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   address?: Prisma.XOR<Prisma.AddressNullableScalarRelationFilter, Prisma.AddressWhereInput> | null
   employee?: Prisma.XOR<Prisma.EmployeeNullableScalarRelationFilter, Prisma.EmployeeWhereInput> | null
   refreshToken?: Prisma.RefreshTokenListRelationFilter
+  reviewedLeaveRequests?: Prisma.LeaveRequestListRelationFilter
 }, "id" | "email" | "username" | "addressId">
 
 export type UserOrderByWithAggregationInput = {
@@ -424,6 +427,7 @@ export type UserCreateInput = {
   address?: Prisma.AddressCreateNestedOneWithoutUserInput
   employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
   refreshToken?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -445,6 +449,7 @@ export type UserUncheckedCreateInput = {
   addressId?: number | null
   employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
   refreshToken?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUpdateInput = {
@@ -465,6 +470,7 @@ export type UserUpdateInput = {
   address?: Prisma.AddressUpdateOneWithoutUserNestedInput
   employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
   refreshToken?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -486,6 +492,7 @@ export type UserUncheckedUpdateInput = {
   addressId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
   refreshToken?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -541,6 +548,11 @@ export type UserUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   addressId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type UserScalarRelationFilter = {
@@ -615,9 +627,20 @@ export type UserSumOrderByAggregateInput = {
   addressId?: Prisma.SortOrder
 }
 
-export type UserNullableScalarRelationFilter = {
-  is?: Prisma.UserWhereInput | null
-  isNot?: Prisma.UserWhereInput | null
+export type UserCreateNestedOneWithoutReviewedLeaveRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedLeaveRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedLeaveRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedLeaveRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutReviewedLeaveRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedLeaveRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedLeaveRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedLeaveRequestsInput
+  upsert?: Prisma.UserUpsertWithoutReviewedLeaveRequestsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewedLeaveRequestsInput, Prisma.UserUpdateWithoutReviewedLeaveRequestsInput>, Prisma.UserUncheckedUpdateWithoutReviewedLeaveRequestsInput>
 }
 
 export type UserCreateNestedOneWithoutEmployeeInput = {
@@ -684,6 +707,104 @@ export type UserUncheckedUpdateOneWithoutAddressNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAddressInput, Prisma.UserUpdateWithoutAddressInput>, Prisma.UserUncheckedUpdateWithoutAddressInput>
 }
 
+export type UserCreateWithoutReviewedLeaveRequestsInput = {
+  firstName: string
+  lastName: string
+  email: string
+  username: string
+  password: string
+  phone?: string | null
+  profileImage?: string | null
+  gender?: $Enums.Gender | null
+  birthDate?: Date | string | null
+  education?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  address?: Prisma.AddressCreateNestedOneWithoutUserInput
+  employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
+  refreshToken?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutReviewedLeaveRequestsInput = {
+  id?: number
+  firstName: string
+  lastName: string
+  email: string
+  username: string
+  password: string
+  phone?: string | null
+  profileImage?: string | null
+  gender?: $Enums.Gender | null
+  birthDate?: Date | string | null
+  education?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  addressId?: number | null
+  employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
+  refreshToken?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReviewedLeaveRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedLeaveRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedLeaveRequestsInput>
+}
+
+export type UserUpsertWithoutReviewedLeaveRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReviewedLeaveRequestsInput, Prisma.UserUncheckedUpdateWithoutReviewedLeaveRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedLeaveRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedLeaveRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReviewedLeaveRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReviewedLeaveRequestsInput, Prisma.UserUncheckedUpdateWithoutReviewedLeaveRequestsInput>
+}
+
+export type UserUpdateWithoutReviewedLeaveRequestsInput = {
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.AddressUpdateOneWithoutUserNestedInput
+  employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
+  refreshToken?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReviewedLeaveRequestsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  addressId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
+  refreshToken?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutEmployeeInput = {
   firstName: string
   lastName: string
@@ -701,6 +822,7 @@ export type UserCreateWithoutEmployeeInput = {
   deletedAt?: Date | string | null
   address?: Prisma.AddressCreateNestedOneWithoutUserInput
   refreshToken?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutEmployeeInput = {
@@ -721,6 +843,7 @@ export type UserUncheckedCreateWithoutEmployeeInput = {
   deletedAt?: Date | string | null
   addressId?: number | null
   refreshToken?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutEmployeeInput = {
@@ -756,6 +879,7 @@ export type UserUpdateWithoutEmployeeInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.AddressUpdateOneWithoutUserNestedInput
   refreshToken?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmployeeInput = {
@@ -776,6 +900,7 @@ export type UserUncheckedUpdateWithoutEmployeeInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   addressId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refreshToken?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutRefreshTokenInput = {
@@ -795,6 +920,7 @@ export type UserCreateWithoutRefreshTokenInput = {
   deletedAt?: Date | string | null
   address?: Prisma.AddressCreateNestedOneWithoutUserInput
   employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutRefreshTokenInput = {
@@ -815,6 +941,7 @@ export type UserUncheckedCreateWithoutRefreshTokenInput = {
   deletedAt?: Date | string | null
   addressId?: number | null
   employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutRefreshTokenInput = {
@@ -850,6 +977,7 @@ export type UserUpdateWithoutRefreshTokenInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.AddressUpdateOneWithoutUserNestedInput
   employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefreshTokenInput = {
@@ -870,6 +998,7 @@ export type UserUncheckedUpdateWithoutRefreshTokenInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   addressId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutAddressInput = {
@@ -889,6 +1018,7 @@ export type UserCreateWithoutAddressInput = {
   deletedAt?: Date | string | null
   employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
   refreshToken?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestCreateNestedManyWithoutReviewerInput
 }
 
 export type UserUncheckedCreateWithoutAddressInput = {
@@ -909,6 +1039,7 @@ export type UserUncheckedCreateWithoutAddressInput = {
   deletedAt?: Date | string | null
   employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
   refreshToken?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutReviewerInput
 }
 
 export type UserCreateOrConnectWithoutAddressInput = {
@@ -944,6 +1075,7 @@ export type UserUpdateWithoutAddressInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
   refreshToken?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAddressInput = {
@@ -964,6 +1096,7 @@ export type UserUncheckedUpdateWithoutAddressInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
   refreshToken?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  reviewedLeaveRequests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 
@@ -973,10 +1106,12 @@ export type UserUncheckedUpdateWithoutAddressInput = {
 
 export type UserCountOutputType = {
   refreshToken: number
+  reviewedLeaveRequests: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   refreshToken?: boolean | UserCountOutputTypeCountRefreshTokenArgs
+  reviewedLeaveRequests?: boolean | UserCountOutputTypeCountReviewedLeaveRequestsArgs
 }
 
 /**
@@ -994,6 +1129,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
  */
 export type UserCountOutputTypeCountRefreshTokenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.RefreshTokenWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewedLeaveRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeaveRequestWhereInput
 }
 
 
@@ -1017,6 +1159,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   address?: boolean | Prisma.User$addressArgs<ExtArgs>
   employee?: boolean | Prisma.User$employeeArgs<ExtArgs>
   refreshToken?: boolean | Prisma.User$refreshTokenArgs<ExtArgs>
+  reviewedLeaveRequests?: boolean | Prisma.User$reviewedLeaveRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1084,6 +1227,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   address?: boolean | Prisma.User$addressArgs<ExtArgs>
   employee?: boolean | Prisma.User$employeeArgs<ExtArgs>
   refreshToken?: boolean | Prisma.User$refreshTokenArgs<ExtArgs>
+  reviewedLeaveRequests?: boolean | Prisma.User$reviewedLeaveRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1099,6 +1243,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     address: Prisma.$AddressPayload<ExtArgs> | null
     employee: Prisma.$EmployeePayload<ExtArgs> | null
     refreshToken: Prisma.$RefreshTokenPayload<ExtArgs>[]
+    reviewedLeaveRequests: Prisma.$LeaveRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1514,6 +1659,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   address<T extends Prisma.User$addressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$addressArgs<ExtArgs>>): Prisma.Prisma__AddressClient<runtime.Types.Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   employee<T extends Prisma.User$employeeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$employeeArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   refreshToken<T extends Prisma.User$refreshTokenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviewedLeaveRequests<T extends Prisma.User$reviewedLeaveRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedLeaveRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeaveRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2019,6 +2165,30 @@ export type User$refreshTokenArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.RefreshTokenScalarFieldEnum | Prisma.RefreshTokenScalarFieldEnum[]
+}
+
+/**
+ * User.reviewedLeaveRequests
+ */
+export type User$reviewedLeaveRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeaveRequest
+   */
+  select?: Prisma.LeaveRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeaveRequest
+   */
+  omit?: Prisma.LeaveRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeaveRequestInclude<ExtArgs> | null
+  where?: Prisma.LeaveRequestWhereInput
+  orderBy?: Prisma.LeaveRequestOrderByWithRelationInput | Prisma.LeaveRequestOrderByWithRelationInput[]
+  cursor?: Prisma.LeaveRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeaveRequestScalarFieldEnum | Prisma.LeaveRequestScalarFieldEnum[]
 }
 
 /**
