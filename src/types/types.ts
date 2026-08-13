@@ -1,6 +1,6 @@
 import { Prisma } from "@/config/generated/client";
 import { Role } from "@/config/generated/enums";
-import { employeeSelect } from "@/modules/employees/employees.DTO";
+import { employeeSelect } from "@/modules/employees/DTOs/employees.DTO";
 import { orderDetailsSelect, orderSelect } from "@/modules/orders/orders.DTO";
 
 export enum HttpStatusCode {

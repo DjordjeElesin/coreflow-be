@@ -1,11 +1,11 @@
 import { Router } from "express";
-import * as usersController from "./users.controller";
+import * as usersController from "./controllers";
 import { validatePayload } from "@/middleware/validate";
 import {
   changePasswordSchema,
   createUserSchema,
   updateUserSchema,
-} from "./users.validation";
+} from "./validation/users.validation";
 import { requireRoles } from "@/middleware/authorizaton";
 import { Role } from "@/config/generated/enums";
 import upload from "@/config/multer";

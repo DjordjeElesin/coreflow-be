@@ -1,4 +1,4 @@
-import * as employeesController from "./employees.controller";
+import * as employeesController from "./controllers";
 import { Router } from "express";
 import { validatePayload } from "@/middleware/validate";
 import {
@@ -6,7 +6,7 @@ import {
   createLeaveRequestSchema,
   updateEmployeeSchema,
   updateLeaveRequestSchema,
-} from "./employees.validation";
+} from "./validation";
 import { requireRoles } from "@/middleware/authorizaton";
 import { Role } from "@/config/generated/enums";
 

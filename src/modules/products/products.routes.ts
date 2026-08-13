@@ -1,10 +1,10 @@
 import { Router } from "express";
-import * as productsController from "./products.controller";
+import * as productsController from "./controllers";
 import { validatePayload } from "@/middleware/validate";
 import {
   createProductSchema,
   updateProductSchema,
-} from "./products.validation";
+} from "./validation/products.validation";
 import { requireRoles } from "@/middleware/authorizaton";
 import { Role } from "@/config/generated/enums";
 
