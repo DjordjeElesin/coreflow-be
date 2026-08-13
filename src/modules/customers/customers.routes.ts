@@ -1,10 +1,7 @@
 import { Router } from "express";
-import * as customersController from "./customers.controller";
+import * as customersController from "./controllers";
 import { validatePayload } from "@/middleware/validate";
-import {
-  createCustomerSchema,
-  updateCustomerSchema,
-} from "./customers.validation";
+import { createCustomerSchema, updateCustomerSchema } from "./validation";
 import { requireRoles } from "@/middleware/authorizaton";
 import { Role } from "@/config/generated/enums";
 

@@ -1,0 +1,79 @@
+import { ContractType, LeaveRequestType } from "@/config/generated/enums";
+import Joi from "joi";
+import {
+  TCreateUserPayload,
+  TUserFilters,
+  userFields,
+  userFiltersSchema,
+} from "../../users/validation/users.validation";
+import { Prisma } from "@/config/generated/client";
+
+export type TCreateEmployeePayload = TCreateUserPayload & {
+  hireDate?: Date;
+  contractType: ContractType;
+  leaveBalance?: number;
+  salary: number;
+  departmentId: number;
+  positionId: number;
+};
+
+export type TEmployeeFilters = TUserFilters & {
+  departmentId?: number;
+  positionId?: number;
+  contractType?: ContractType;
+};
+
+export type TCreateLeaveRequestPayload = Omit<
+  Prisma.LeaveRequestUncheckedCreateInput,
+  "employeeId" | "status"
+>;
+export type TUpdateLeaveRequestPayload = Partial<
+  Omit<Prisma.LeaveRequestUncheckedCreateInput, "employeeId">
+>;
+
+export const employeeFiltersSchema = Joi.object<TEmployeeFilters>({
+  departmentId: Joi.number().optional(),
+  positionId: Joi.number().optional(),
+  contractType: Joi.string()
+    .valid(...Object.values(ContractType))
+    .optional(),
+}).concat(userFiltersSchema);
+
+export const createEmployeeSchema = Joi.object<TCreateEmployeePayload>({
+  ...userFields,
+  hireDate: Joi.date().iso().optional(),
+  contractType: Joi.string()
+    .valid(...Object.values(ContractType))
+    .required(),
+  leaveBalance: Joi.number().min(0).optional(),
+  salary: Joi.number().min(0).required(),
+  departmentId: Joi.number().required(),
+  positionId: Joi.number().required(),
+});
+
+export const updateEmployeeSchema = Joi.object({
+  hireDate: Joi.date().iso().optional(),
+  contractType: Joi.string()
+    .valid(...Object.values(ContractType))
+    .optional(),
+  leaveBalance: Joi.number().min(0).optional(),
+  salary: Joi.number().min(0).optional(),
+  departmentId: Joi.number().optional(),
+  positionId: Joi.number().optional(),
+});
+
+const leaveRequestFields = {
+  startDate: Joi.date().iso().required(),
+  endDate: Joi.date().iso().greater(Joi.ref("startDate")).required(),
+  leaveType: Joi.string()
+    .valid(...Object.values(LeaveRequestType))
+    .required(),
+  reason: Joi.string().optional(),
+};
+
+export const createLeaveRequestSchema = Joi.object(leaveRequestFields);
+
+export const updateLeaveRequestSchema = createLeaveRequestSchema.fork(
+  Object.keys(leaveRequestFields),
+  (schema) => schema.optional(),
+);
