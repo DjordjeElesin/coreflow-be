@@ -1,13 +1,13 @@
 import * as employeesController from "./controllers";
 import { Router } from "express";
-import { validatePayload } from "@/middleware/validate";
+import { validateBody } from "@/middleware/validate";
 import {
   createEmployeeSchema,
   createLeaveRequestSchema,
   updateEmployeeSchema,
   updateLeaveRequestSchema,
 } from "./validation";
-import { requireRoles } from "@/middleware/authorizaton";
+import { requireRoles } from "@/middleware/authorization";
 import { Role } from "@/config/generated/enums";
 
 const employeesRouter = Router();
@@ -15,35 +15,36 @@ const employeesRouter = Router();
 //GET METHODS
 employeesRouter.get("/", employeesController.getEmployees);
 employeesRouter.get("/:id", employeesController.getEmployee);
+employeesRouter.get("/leave-requests", employeesController.getLeaveRequests);
 
 //POST METHODS
 employeesRouter.post(
   "/",
   requireRoles([Role.ADMIN, Role.MODERATOR]),
-  validatePayload(createEmployeeSchema),
+  validateBody(createEmployeeSchema),
   employeesController.createEmployee,
 );
 
 employeesRouter.post(
-  "/:id/leave-request",
+  "/:id/leave-requests",
   requireRoles([Role.USER, Role.ADMIN]),
-  validatePayload(createLeaveRequestSchema),
+  validateBody(createLeaveRequestSchema),
   employeesController.createLeaveRequest,
 );
 
 //UPDATE METHODS
 employeesRouter.patch(
   "/:id",
-  validatePayload(updateEmployeeSchema),
+  validateBody(updateEmployeeSchema),
   employeesController.updateEmployee,
 );
 employeesRouter.patch(
-  "/leave-request/:id",
-  validatePayload(updateLeaveRequestSchema),
+  "/leave-requests/:id",
+  validateBody(updateLeaveRequestSchema),
   employeesController.updateLeaveRequest,
 );
 employeesRouter.patch(
-  "/leave-request/:id/approve",
+  "/leave-requests/:id/approve",
   requireRoles([Role.ADMIN, Role.MODERATOR]),
   employeesController.updateLeaveRequest,
 );
@@ -52,7 +53,7 @@ employeesRouter.patch(
 employeesRouter.delete("/:id", employeesController.deleteEmployee);
 
 employeesRouter.delete(
-  "/leave-request/:id",
+  "/leave-requests/:id",
   employeesController.deleteLeaveRequest,
 );
 

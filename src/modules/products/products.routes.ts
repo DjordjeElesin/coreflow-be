@@ -1,11 +1,11 @@
 import { Router } from "express";
 import * as productsController from "./controllers";
-import { validatePayload } from "@/middleware/validate";
+import { validateBody } from "@/middleware/validate";
 import {
   createProductSchema,
   updateProductSchema,
 } from "./validation/products.validation";
-import { requireRoles } from "@/middleware/authorizaton";
+import { requireRoles } from "@/middleware/authorization";
 import { Role } from "@/config/generated/enums";
 
 const productsRouter = Router();
@@ -18,7 +18,7 @@ productsRouter.get("/:id", productsController.getProductById);
 productsRouter.post(
   "/",
   requireRoles([Role.ADMIN]),
-  validatePayload(createProductSchema),
+  validateBody(createProductSchema),
   productsController.createProduct,
 );
 
@@ -26,7 +26,7 @@ productsRouter.post(
 productsRouter.patch(
   "/:id",
   requireRoles([Role.ADMIN]),
-  validatePayload(updateProductSchema),
+  validateBody(updateProductSchema),
   productsController.updateProduct,
 );
 

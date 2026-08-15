@@ -1,4 +1,4 @@
-import upload from "@/config/multer";
+import upload from "@/config/fileUploads/multer";
 import { Router } from "express";
 import * as uploadsController from "./uploads.controller";
 

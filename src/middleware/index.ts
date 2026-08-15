@@ -1,3 +1,4 @@
 export { default as httpLogger } from "./httpLogger";
-export { notFoundHandler } from "./notFoundHandler";
+export { routeNotFoundHandler } from "./routeNotFoundHandler";
 export { errorHandler } from "./errorHandler";
+export * from "./validate";

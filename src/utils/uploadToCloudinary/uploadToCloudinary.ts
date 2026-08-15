@@ -1,5 +1,5 @@
 import type { UploadApiOptions, UploadApiResponse } from "cloudinary";
-import cloudinary from "@/config/cloudinary";
+import cloudinary from "@/config/fileUploads/cloudinary";
 
 export const uploadToCloudinary = (buffer: Buffer, options: UploadApiOptions) =>
   new Promise<UploadApiResponse>((resolve, reject) => {

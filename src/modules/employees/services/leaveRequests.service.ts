@@ -2,7 +2,7 @@ import { TAuthUser } from "@/types";
 import {
   TCreateLeaveRequestPayload,
   TUpdateLeaveRequestPayload,
-} from "../validation/employees.validation";
+} from "../validation";
 import { BadRequestError, ForbiddenError } from "@/errors";
 import { ERROR_MSGS } from "@/constants";
 import * as employeesCoreService from "./employees.service.core";
@@ -10,6 +10,10 @@ import { getLeaveDurationInDays } from "../utils";
 import prisma from "@/config/database";
 import { LeaveRequestStatus, Role } from "@/config/generated/enums";
 import { assertPermissionToManageUser } from "@/utils/assertPermissionToManageUser";
+import { TLeaveRequestFilters } from "../validation/leaveRequest.validation";
+
+export const findLeaveRequests = async (filters: TLeaveRequestFilters) =>
+  prisma.leaveRequest.findMany({ where: filters });
 
 export const findLeaveRequestsByEmployeeId = async (id: number) =>
   prisma.leaveRequest.findMany({ where: { employeeId: id } });
