@@ -50,11 +50,16 @@ export const create = async (payload: TCreateProductPayload) => {
       discountPercentage: payload.discountPercentage ?? 0,
       rating: 0,
     },
+    include: productInclude,
   });
 };
 
 export const update = async (id: number, payload: TUpdateProductPayload) =>
-  await prisma.product.update({ where: { id }, data: payload });
+  await prisma.product.update({
+    where: { id },
+    data: payload,
+    include: productInclude,
+  });
 
 export const deleteProduct = async (id: number) =>
   await prisma.product.delete({ where: { id } });

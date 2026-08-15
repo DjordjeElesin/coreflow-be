@@ -6,7 +6,6 @@ import {
   userFields,
   userFiltersSchema,
 } from "../../users/validation/users.validation";
-import { Prisma } from "@/config/generated/client";
 
 export type TCreateEmployeePayload = TCreateUserPayload & {
   hireDate?: Date;
@@ -22,14 +21,6 @@ export type TEmployeeFilters = TUserFilters & {
   positionId?: number;
   contractType?: ContractType;
 };
-
-export type TCreateLeaveRequestPayload = Omit<
-  Prisma.LeaveRequestUncheckedCreateInput,
-  "employeeId" | "status"
->;
-export type TUpdateLeaveRequestPayload = Partial<
-  Omit<Prisma.LeaveRequestUncheckedCreateInput, "employeeId">
->;
 
 export const employeeFiltersSchema = Joi.object<TEmployeeFilters>({
   departmentId: Joi.number().optional(),
@@ -61,19 +52,3 @@ export const updateEmployeeSchema = Joi.object({
   departmentId: Joi.number().optional(),
   positionId: Joi.number().optional(),
 });
-
-const leaveRequestFields = {
-  startDate: Joi.date().iso().required(),
-  endDate: Joi.date().iso().greater(Joi.ref("startDate")).required(),
-  leaveType: Joi.string()
-    .valid(...Object.values(LeaveRequestType))
-    .required(),
-  reason: Joi.string().optional(),
-};
-
-export const createLeaveRequestSchema = Joi.object(leaveRequestFields);
-
-export const updateLeaveRequestSchema = createLeaveRequestSchema.fork(
-  Object.keys(leaveRequestFields),
-  (schema) => schema.optional(),
-);

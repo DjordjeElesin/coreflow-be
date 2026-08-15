@@ -1,6 +1,6 @@
+import { buildUserWhereClause } from "@/modules/users/utils";
 import { differenceInBusinessDays } from "date-fns";
-import { buildUserWhereClause } from "../users/users.utils";
-import { TEmployeeFilters } from "./employees.validation";
+import { TEmployeeFilters } from "../validation";
 
 export const buildEmployeeWhereClause = (filters: TEmployeeFilters) => {
   const userWhere = buildUserWhereClause(filters);

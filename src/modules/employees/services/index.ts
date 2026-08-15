@@ -1,2 +1,2 @@
 export * from "./employees.service.core";
-export * from "./employees.service.leaveRequests";
+export * from "./leaveRequests.service";

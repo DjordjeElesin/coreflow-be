@@ -2,7 +2,7 @@ import { Router } from "express";
 import usersRouter from "./users/users.routes";
 import employeesRouter from "./employees/employees.routes";
 import authRouter from "./auth/auth.routes";
-import { requireAuth } from "@/middleware/authorizaton";
+import { requireAuth } from "@/middleware/authorization";
 import productsRouter from "./products/products.routes";
 import ordersRouter from "./orders/orders.routes";
 import uploadsRouter from "./uploads/uploads.routes";

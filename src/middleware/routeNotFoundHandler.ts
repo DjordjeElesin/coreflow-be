@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { NotFoundError } from "@/errors";
 
-export const notFoundHandler = (
+export const routeNotFoundHandler = (
   req: Request,
   _res: Response,
   next: NextFunction,

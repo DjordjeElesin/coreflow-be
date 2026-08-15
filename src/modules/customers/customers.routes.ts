@@ -1,8 +1,8 @@
 import { Router } from "express";
 import * as customersController from "./controllers";
-import { validatePayload } from "@/middleware/validate";
+import { validateBody } from "@/middleware/validate";
 import { createCustomerSchema, updateCustomerSchema } from "./validation";
-import { requireRoles } from "@/middleware/authorizaton";
+import { requireRoles } from "@/middleware/authorization";
 import { Role } from "@/config/generated/enums";
 
 const customersRouter = Router();
@@ -15,15 +15,15 @@ customersRouter.get("/:id/orders", customersController.getCustomerOrders);
 //POST METHODS
 customersRouter.post(
   "/",
-  validatePayload(createCustomerSchema),
+  validateBody(createCustomerSchema),
   customersController.createCustomer,
 );
 
 //PATCH METHODS
 customersRouter.patch(
   "/:id",
-  validatePayload(updateCustomerSchema),
-  customersController.createCustomer,
+  validateBody(updateCustomerSchema),
+  customersController.updateCustomer,
 );
 
 //DELETE METHODS

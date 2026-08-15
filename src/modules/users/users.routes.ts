@@ -1,14 +1,14 @@
 import { Router } from "express";
 import * as usersController from "./controllers";
-import { validatePayload } from "@/middleware/validate";
+import { validateBody } from "@/middleware/validate";
 import {
   changePasswordSchema,
   createUserSchema,
   updateUserSchema,
 } from "./validation/users.validation";
-import { requireRoles } from "@/middleware/authorizaton";
+import { requireRoles } from "@/middleware/authorization";
 import { Role } from "@/config/generated/enums";
-import upload from "@/config/multer";
+import upload from "@/config/fileUploads/multer";
 
 const usersRouter = Router();
 
@@ -28,7 +28,7 @@ usersRouter.get(
 usersRouter.post(
   "/",
   requireRoles([Role.ADMIN]),
-  validatePayload(createUserSchema),
+  validateBody(createUserSchema),
   usersController.createUser,
 );
 usersRouter.post(
@@ -41,12 +41,12 @@ usersRouter.post(
 usersRouter.patch(
   "/:id",
   requireRoles([Role.ADMIN]),
-  validatePayload(updateUserSchema),
+  validateBody(updateUserSchema),
   usersController.updateUser,
 );
 usersRouter.patch(
   "/:id/change-password",
-  validatePayload(changePasswordSchema),
+  validateBody(changePasswordSchema),
   usersController.changeUserPassword,
 );
 

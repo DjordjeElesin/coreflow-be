@@ -9,7 +9,7 @@ export const uploadAsset = async (req: Request, res: Response) => {
   sendResponse({
     res,
     statusCode: HttpStatusCode.CREATED,
-    data: { urls: uploaded.secure_url },
+    data: { url: uploaded.secure_url },
   });
 };
 

@@ -5,7 +5,7 @@ import {
   TOrderDetailsDTO,
   TOrderDTO,
 } from "@/types";
-import { calculateDiscountedTotal } from "./orders.utils";
+import { calculateDiscountedTotal } from "../utils";
 
 export const orderSelect = {
   id: true,

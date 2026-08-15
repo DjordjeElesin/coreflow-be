@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as ordersController from "./controllers";
-import { validatePayload } from "@/middleware/validate";
+import { validateBody } from "@/middleware/validate";
 import { createOrderSchema, orderFiltersSchema } from "./validation";
 
 const ordersRouter = Router();
@@ -8,7 +8,7 @@ const ordersRouter = Router();
 //GET METHODS
 ordersRouter.get(
   "/",
-  validatePayload(orderFiltersSchema),
+  validateBody(orderFiltersSchema),
   ordersController.getOrders,
 );
 ordersRouter.get("/:id", ordersController.getOrderById);
@@ -16,13 +16,13 @@ ordersRouter.get("/:id", ordersController.getOrderById);
 //POST METHODS
 ordersRouter.post(
   "/",
-  validatePayload(createOrderSchema),
+  validateBody(createOrderSchema),
   ordersController.createOrder,
 );
 
 //PATCH METHODS
 ordersRouter.patch("/:id/confirm", ordersController.confirmOrder);
-ordersRouter.patch("/:id/cancel", ordersController.confirmOrder);
+ordersRouter.patch("/:id/cancel", ordersController.cancelOrder);
 ordersRouter.patch("/:id/ship", ordersController.shipOrder);
 ordersRouter.patch("/:id/deliver", ordersController.deliverOrder);
 
