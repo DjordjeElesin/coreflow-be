@@ -1,10 +1,11 @@
 import { Router } from "express";
 import * as usersController from "./controllers";
-import { validateBody } from "@/middleware/validate";
+import { validateBody, validateQuery } from "@/middleware/validate";
 import {
   changePasswordSchema,
   createUserSchema,
   updateUserSchema,
+  userFiltersSchema,
 } from "./validation/users.validation";
 import { requireRoles } from "@/middleware/authorization";
 import { Role } from "@/config/generated/enums";
@@ -16,6 +17,7 @@ const usersRouter = Router();
 usersRouter.get(
   "/",
   requireRoles([Role.ADMIN, Role.MODERATOR]),
+  validateQuery(userFiltersSchema),
   usersController.getUsers,
 );
 usersRouter.get(

@@ -1,14 +1,14 @@
 import * as employeesService from "../services";
 import { Request, Response } from "express";
 import { buildEmployeeDetailsDTO, buildEmployeeDTO } from "../DTOs";
-import { validateIdParam, validateJoiSchema } from "@/utils/validationUtils";
+import { validateIdParam } from "@/utils/validationUtils";
 import { sendResponse } from "@/utils/sendResponse";
 import { HttpStatusCode } from "@/types";
-import { employeeFiltersSchema } from "../validation";
+import { TEmployeeFilters } from "../validation";
 import { getCurrentUser } from "@/utils/getCurrentUser";
 
 export const getEmployees = async (req: Request, res: Response) => {
-  const filters = validateJoiSchema(employeeFiltersSchema, req.query);
+  const filters = req.validQuery as TEmployeeFilters;
 
   const employees = await employeesService.find(filters);
   sendResponse({

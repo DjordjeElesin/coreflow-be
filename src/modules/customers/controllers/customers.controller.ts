@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import * as customersService from "../services";
 import { sendResponse } from "@/utils/sendResponse";
 import { HttpStatusCode } from "@/types";
-import { validateIdParam, validateJoiSchema } from "@/utils/validationUtils";
-import { customerFiltersSchema } from "../validation";
+import { validateIdParam } from "@/utils/validationUtils";
+import { TCustomerFilters } from "../validation";
 
 export const getCustomers = async (req: Request, res: Response) => {
-  const filters = validateJoiSchema(customerFiltersSchema, req.query);
+  const filters = req.validQuery as TCustomerFilters;
   const customers = await customersService.find(filters);
 
   sendResponse({ res, statusCode: HttpStatusCode.OK, data: customers });

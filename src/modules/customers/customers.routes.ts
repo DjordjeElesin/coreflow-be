@@ -1,14 +1,22 @@
 import { Router } from "express";
 import * as customersController from "./controllers";
-import { validateBody } from "@/middleware/validate";
-import { createCustomerSchema, updateCustomerSchema } from "./validation";
+import { validateBody, validateQuery } from "@/middleware/validate";
+import {
+  createCustomerSchema,
+  customerFiltersSchema,
+  updateCustomerSchema,
+} from "./validation";
 import { requireRoles } from "@/middleware/authorization";
 import { Role } from "@/config/generated/enums";
 
 const customersRouter = Router();
 
 //GET METHODS
-customersRouter.get("/", customersController.getCustomers);
+customersRouter.get(
+  "/",
+  validateQuery(customerFiltersSchema),
+  customersController.getCustomers,
+);
 customersRouter.get("/:id", customersController.getCustomer);
 customersRouter.get("/:id/orders", customersController.getCustomerOrders);
 

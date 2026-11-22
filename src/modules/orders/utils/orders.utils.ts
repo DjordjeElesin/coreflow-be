@@ -7,19 +7,23 @@ export const buildOrdersWhereClause = (
 ): Prisma.OrderWhereInput => {
   const { customer, status, productName } = filters;
   return {
-    customer: {
-      OR: [
-        { firstName: { contains: customer, mode: "insensitive" } },
-        { lastName: { contains: customer, mode: "insensitive" } },
-        { email: { contains: customer, mode: "insensitive" } },
-      ],
-    },
-    status: status,
-    orderItems: {
-      some: {
-        product: { name: { contains: productName, mode: "insensitive" } },
-      },
-    },
+    status,
+    customer: customer
+      ? {
+          OR: [
+            { firstName: { contains: customer, mode: "insensitive" } },
+            { lastName: { contains: customer, mode: "insensitive" } },
+            { email: { contains: customer, mode: "insensitive" } },
+          ],
+        }
+      : undefined,
+    orderItems: productName
+      ? {
+          some: {
+            product: { name: { contains: productName, mode: "insensitive" } },
+          },
+        }
+      : undefined,
   };
 };
 

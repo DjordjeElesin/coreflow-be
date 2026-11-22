@@ -14,8 +14,7 @@ export const buildProductWhereClause = (
   const { name, brand, categoryId, stock } = filters;
   const stockFilter = () => {
     if (stock === EStockLevels.IN_STOCK) return { gt: 50 };
-    if (stock === EStockLevels.LOW_STOCK) return { gte: 10, lte: 50 };
-    if (stock === EStockLevels.ALMOST_SOLD_OUT) return { lte: 10, gt: 0 };
+    if (stock === EStockLevels.LOW_STOCK) return { gte: 0, lte: 20 };
     if (stock === EStockLevels.OUT_OF_STOCK) return 0;
     return undefined;
   };

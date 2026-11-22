@@ -13,7 +13,28 @@ import { assertPermissionToManageUser } from "@/utils/assertPermissionToManageUs
 import { TLeaveRequestFilters } from "../validation/leaveRequest.validation";
 
 export const findLeaveRequests = async (filters: TLeaveRequestFilters) =>
-  prisma.leaveRequest.findMany({ where: filters });
+  prisma.leaveRequest.findMany({
+    where: {
+      ...(filters.leaveType ? { leaveType: filters.leaveType } : {}),
+      ...(filters.status ? { status: filters.status } : {}),
+      ...(filters.isReviewed ? { reviewedAt: { not: null } } : {}),
+    },
+    include: {
+      employee: {
+        include: {
+          user: {
+            select: {
+              firstName: true,
+              lastName: true,
+              email: true,
+              profileImage: true,
+            },
+          },
+        },
+      },
+    },
+    orderBy: { createdAt: "asc" },
+  });
 
 export const findLeaveRequestsByEmployeeId = async (id: number) =>
   prisma.leaveRequest.findMany({ where: { employeeId: id } });
@@ -119,6 +140,7 @@ export const deleteLeaveRequest = async (
   id: number,
   currentUser: TAuthUser,
 ) => {
+  const isAdmin = currentUser.role === Role.ADMIN;
   const leaveRequest = await prisma.leaveRequest.findFirst({ where: { id } });
   if (!leaveRequest) throw new BadRequestError("Leave request does not exist");
 
@@ -128,7 +150,7 @@ export const deleteLeaveRequest = async (
     role: employee.user.role,
   });
 
-  if (leaveRequest.status === LeaveRequestStatus.PENDING)
+  if (leaveRequest.status === LeaveRequestStatus.PENDING && !isAdmin)
     throw new BadRequestError(
       "You can only delete Rejected or Approved leave requests",
     );

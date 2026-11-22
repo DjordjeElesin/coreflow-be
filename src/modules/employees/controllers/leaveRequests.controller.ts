@@ -1,14 +1,14 @@
 import * as employeesService from "../services";
 import { Request, Response } from "express";
-import { validateIdParam, validateJoiSchema } from "@/utils/validationUtils";
+import { validateIdParam } from "@/utils/validationUtils";
 import { getCurrentUser } from "@/utils/getCurrentUser";
 import { sendResponse } from "@/utils/sendResponse";
 import { HttpStatusCode } from "@/types";
-import { leaveRequestFiltersSchema } from "../validation";
+import { TLeaveRequestFilters } from "../validation";
 
 export const getLeaveRequests = async (req: Request, res: Response) => {
-  const filters = validateJoiSchema(leaveRequestFiltersSchema, req.params);
-  const leaveRequests = employeesService.findLeaveRequests(filters);
+  const filters = req.validQuery as TLeaveRequestFilters;
+  const leaveRequests = await employeesService.findLeaveRequests(filters);
 
   sendResponse({ res, statusCode: HttpStatusCode.OK, data: leaveRequests });
 };

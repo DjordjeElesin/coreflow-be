@@ -11,14 +11,14 @@ export const employeeSelect = {
     omit: { password: true, addressId: true, deletedAt: true, updatedAt: true },
     include: { address: true },
   },
-  department: { select: { id: true, name: true } },
+  department: {
+    select: { id: true, name: true, description: true, manager: true },
+  },
   position: { select: { id: true, name: true } },
   lastLeaveResetYear: true,
 } satisfies Prisma.EmployeeSelect;
 
-export const buildEmployeeDTO = (
-  data: TEmployeeDbOutput,
-): TEmployeeDTO => {
+export const buildEmployeeDTO = (data: TEmployeeDbOutput): TEmployeeDTO => {
   const { user, ...rest } = data;
   return {
     ...rest,

@@ -1,5 +1,8 @@
 import { Prisma } from "@/config/generated/client";
-import { TCreateUserPayload, TUserFilters } from "../validation/users.validation";
+import {
+  TCreateUserPayload,
+  TUserFilters,
+} from "../validation/users.validation";
 import { findUniqueByEmail } from "../../auth/services/auth.service";
 import { ConflictError } from "@/errors";
 import bcrypt from "bcrypt";
@@ -7,7 +10,7 @@ import bcrypt from "bcrypt";
 export const buildUserWhereClause = (
   filters: TUserFilters,
 ): Prisma.UserWhereInput => {
-  const { name, email, role, gender, city, country, state, street } = filters;
+  const { search, role, gender, city, country, state, street } = filters;
 
   const hasAddressFilter = Boolean(city || country || state || street);
   const addressFilter: Prisma.AddressWhereInput = {
@@ -18,16 +21,16 @@ export const buildUserWhereClause = (
   };
 
   return {
-    ...(name
+    ...(search
       ? {
           OR: [
-            { firstName: { contains: name, mode: "insensitive" } },
-            { lastName: { contains: name, mode: "insensitive" } },
+            { firstName: { contains: search, mode: "insensitive" } },
+            { lastName: { contains: search, mode: "insensitive" } },
+            { email: { contains: search, mode: "insensitive" } },
           ],
         }
       : {}),
     deletedAt: null,
-    email: email ? { contains: email, mode: "insensitive" } : undefined,
     role,
     gender,
     address: hasAddressFilter ? addressFilter : undefined,
