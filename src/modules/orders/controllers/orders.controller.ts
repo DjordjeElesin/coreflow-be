@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import * as ordersService from "../services";
-import { orderFiltersSchema } from "../validation/orders.validation";
-import { validateIdParam, validateJoiSchema } from "@/utils/validationUtils";
+import { TOrderFilters } from "../validation/orders.validation";
+import { validateIdParam } from "@/utils/validationUtils";
 import { sendResponse } from "@/utils/sendResponse";
 import { HttpStatusCode } from "@/types";
 import { buildOrderDetailsDTO, buildOrderDTO } from "../DTOs";
 
 export const getOrders = async (req: Request, res: Response) => {
-  const filters = validateJoiSchema(orderFiltersSchema, req.query);
+  const filters = req.validQuery as TOrderFilters;
   const orders = await ordersService.find(filters);
 
   sendResponse({

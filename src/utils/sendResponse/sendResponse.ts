@@ -20,7 +20,7 @@ export const sendResponse = <TData>({
 
   res.status(statusCode).json({
     status: status,
-    ...(data ? { data } : {}),
+    ...(data !== undefined ? { data } : {}),
     ...(message ? { message } : {}),
     ...(extras ?? {}),
   });

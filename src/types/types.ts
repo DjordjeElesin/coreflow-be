@@ -1,7 +1,7 @@
 import { Prisma } from "@/config/generated/client";
 import { Role } from "@/config/generated/enums";
 import { employeeSelect } from "@/modules/employees/DTOs/employees.DTO";
-import { orderDetailsSelect, orderSelect } from "@/modules/orders/orders.DTO";
+import { orderDetailsSelect, orderSelect } from "@/modules/orders/DTOs";
 
 export enum HttpStatusCode {
   OK = 200,
@@ -52,7 +52,6 @@ export type TEmployeeDTO = Omit<TEmployeeDbOutput, "user"> & TUserFields;
 export enum EStockLevels {
   IN_STOCK = "in-stock",
   LOW_STOCK = "low-stock",
-  ALMOST_SOLD_OUT = "almost-sold-out",
   OUT_OF_STOCK = "out-of-stock",
 }
 

@@ -63,3 +63,6 @@ export const update = async (id: number, payload: TUpdateProductPayload) =>
 
 export const deleteProduct = async (id: number) =>
   await prisma.product.delete({ where: { id } });
+
+export const getCategories = async () =>
+  await prisma.productCategory.findMany({ select: { id: true, name: true } });

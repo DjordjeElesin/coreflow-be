@@ -8,3 +8,10 @@ export const validateBody =
     req.body = validateJoiSchema(schema, req.body);
     next();
   };
+
+export const validateQuery =
+  (schema: ObjectSchema) =>
+  (req: Request, _res: Response, next: NextFunction) => {
+    req.validQuery = validateJoiSchema(schema, req.query);
+    next();
+  };

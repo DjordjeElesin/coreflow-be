@@ -1,13 +1,13 @@
 import * as usersService from "../services";
 import { Request, Response } from "express";
-import { validateIdParam, validateJoiSchema } from "@/utils/validationUtils";
-import { userFiltersSchema } from "../validation";
+import { validateIdParam } from "@/utils/validationUtils";
+import { TUserFilters } from "../validation";
 import { sendResponse } from "@/utils/sendResponse";
 import { HttpStatusCode } from "@/types";
 import { getCurrentUser } from "@/utils/getCurrentUser";
 
 export const getUsers = async (req: Request, res: Response) => {
-  const filters = validateJoiSchema(userFiltersSchema, req.query);
+  const filters = req.validQuery as TUserFilters;
   const users = await usersService.find(filters);
 
   sendResponse({ res, statusCode: HttpStatusCode.OK, data: users });

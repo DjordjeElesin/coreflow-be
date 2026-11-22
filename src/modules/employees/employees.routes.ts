@@ -1,9 +1,11 @@
 import * as employeesController from "./controllers";
 import { Router } from "express";
-import { validateBody } from "@/middleware/validate";
+import { validateBody, validateQuery } from "@/middleware/validate";
 import {
   createEmployeeSchema,
   createLeaveRequestSchema,
+  employeeFiltersSchema,
+  leaveRequestFiltersSchema,
   updateEmployeeSchema,
   updateLeaveRequestSchema,
 } from "./validation";
@@ -13,9 +15,17 @@ import { Role } from "@/config/generated/enums";
 const employeesRouter = Router();
 
 //GET METHODS
-employeesRouter.get("/", employeesController.getEmployees);
+employeesRouter.get(
+  "/",
+  validateQuery(employeeFiltersSchema),
+  employeesController.getEmployees,
+);
 employeesRouter.get("/:id", employeesController.getEmployee);
-employeesRouter.get("/leave-requests", employeesController.getLeaveRequests);
+employeesRouter.get(
+  "/leave-requests",
+  validateQuery(leaveRequestFiltersSchema),
+  employeesController.getLeaveRequests,
+);
 
 //POST METHODS
 employeesRouter.post(

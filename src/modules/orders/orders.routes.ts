@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as ordersController from "./controllers";
-import { validateBody } from "@/middleware/validate";
+import { validateBody, validateQuery } from "@/middleware/validate";
 import { createOrderSchema, orderFiltersSchema } from "./validation";
 
 const ordersRouter = Router();
@@ -8,7 +8,7 @@ const ordersRouter = Router();
 //GET METHODS
 ordersRouter.get(
   "/",
-  validateBody(orderFiltersSchema),
+  validateQuery(orderFiltersSchema),
   ordersController.getOrders,
 );
 ordersRouter.get("/:id", ordersController.getOrderById);
